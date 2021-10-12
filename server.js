@@ -26,6 +26,16 @@ app.get('/',(req,res) => {
     res.redirect('/')
 })
 
+app.get('/api/houses',async (req,res)=>{
+    let data = await House.find({}).populate("users")
+    res.status(200).json(data)
+})
+
+app.get('/api/users',async (req,res)=>{
+    let data = await User.find({}).populate('house')
+    res.status(200).json(data)
+})
+
 // app.get('/campgrounds',catchAsync(async (req,res) => {
 //     const campgrounds = await Campground.find({});
 //     res.render('campgrounds/index', {campgrounds})

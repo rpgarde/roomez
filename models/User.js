@@ -22,7 +22,7 @@ const UserSchema = new Schema({
         type: String,
         required: true,
     },
-    houseId: {
+    house: {
         type: Schema.Types.ObjectId,
         ref:"House"
     }

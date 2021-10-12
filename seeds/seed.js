@@ -28,11 +28,25 @@ const seedDb = async() => {
 
     console.log('db cleared')
 
+    // Create house
     await House.insertMany(houses)
+    // Store house data
+    let seededHouses = await House.find({})
+
+    // Create users
+    await User.insertMany(users)
+
+    // Store user data
+    let seededUsers = await User.find({})
+
+    // Push user data into house
+    await House.findOneAndUpdate({},{$push:{ users: seededUsers }})
+    // Push house data into user
+    await User.updateMany({},{$push:{house:seededHouses[0]}})
+
     // await Bill.insertMany(bills)
     // await Chore.insertMany(chores)
     // await Message.insertMany(messages)
-    // await User.insertMany(users)
 
     console.log('DATABASE SEEDED')
 }

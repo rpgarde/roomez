@@ -1,3 +1,5 @@
+const mongoose = require('mongoose')
+
 module.exports = [
     {
         firstName: "Paolo",
@@ -5,7 +7,7 @@ module.exports = [
         mobile: '0412957544',
         email: 'tin@test.com',
         password: "password",
-        houseId: 1
+        // houseId: mongoose.Types.ObjectId(1)
     },
     {
         firstName: "Tin",
@@ -13,6 +15,6 @@ module.exports = [
         mobile: '0412953544',
         email: 'tin@test.com',
         password: "password",
-        houseId: 1
+        // houseId: mongoose.Types.ObjectId(1)
     },
 ];
