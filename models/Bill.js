@@ -13,7 +13,7 @@ const BillSchema = new Schema({
     dueAt:{
         type: Date
     },
-    houseId:{
+    house:{
         type:Schema.Types.ObjectId,
         ref:"House"
     },
@@ -36,6 +36,9 @@ const BillSchema = new Schema({
     },
     paidAt:{
         type: Date
+    },
+    photo:{
+        type: String
     }
 });
 

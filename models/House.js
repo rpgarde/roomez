@@ -9,10 +9,14 @@ const HouseSchema = new Schema({
     photo: {
         type: String
     },
-    users: [{
+    occupants: [{
         type:Schema.Types.ObjectId,
         ref:"User"
-    }]
+    }],
+    code: {
+        type:String,
+        required:true
+    }
 });
 
 module.exports = mongoose.model('House',HouseSchema)

@@ -13,7 +13,7 @@ const ChoreSchema = new Schema({
     dueAt:{
         type: Date
     },
-    houseId:{
+    house:{
         type:Schema.Types.ObjectId,
         ref:"House"
     },
@@ -32,6 +32,9 @@ const ChoreSchema = new Schema({
     },
     completedAt:{
         type: Date
+    },
+    photo:{
+        type:String
     }
 });
 

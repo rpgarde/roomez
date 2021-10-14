@@ -27,7 +27,7 @@ app.get('/',(req,res) => {
 })
 
 app.get('/api/houses',async (req,res)=>{
-    let data = await House.find({}).populate("users")
+    let data = await House.find({}).populate("occupants")
     res.status(200).json(data)
 })
 

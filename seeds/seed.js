@@ -40,7 +40,7 @@ const seedDb = async() => {
     let seededUsers = await User.find({})
 
     // Push user data into house
-    await House.findOneAndUpdate({},{$push:{ users: seededUsers }})
+    await House.findOneAndUpdate({},{$push:{ occupants: seededUsers }})
     // Push house data into user
     await User.updateMany({},{$push:{house:seededHouses[0]}})
 

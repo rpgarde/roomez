@@ -25,6 +25,9 @@ const UserSchema = new Schema({
     house: {
         type: Schema.Types.ObjectId,
         ref:"House"
+    },
+    photo:{
+        type:String
     }
 });
 
