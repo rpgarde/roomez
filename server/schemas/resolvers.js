@@ -2,26 +2,31 @@ const {Bill,Chore,House,Message,User} = require("../models");
 
 const resolvers = {
   Query: {
-    house: async () => {
-      return await House.find({}).populate("occupants");
+    house: async (_,{ _id }) => {
+      const params = _id ? { _id } : {};
+      return await House.find(params).populate("occupants");
     },
-    user: async () => {
-      return await User.find({}).populate("house")
+    user: async (_,{ _id }) => {
+      const params = _id ? { _id } : {};
+      return await User.find(params).populate("house")
     },
-    bill: async() => {
-      return await Bill.find({})
+    bill: async(_,{ _id }) => {
+      const params = _id ? { _id } : {};
+      return await Bill.find(params)
         .populate('createdBy')
         .populate('assignedTo')
         .populate('house')
     },
-    chore: async() => {
-      return await Chore.find({})
+    chore: async(_,{ _id }) => {
+            const params = _id ? { _id } : {};
+      return await Chore.find(params)
         .populate('createdBy')
         .populate('assignedTo')
         .populate('house')
     },
-    message: async() => {
-      return await Message.find({})
+    message: async(_,{ _id }) => {
+      const params = _id ? { _id } : {};
+      return await Message.find(params)
         .populate('createdBy')
         .populate('house')
     }
@@ -41,14 +46,5 @@ const resolvers = {
   //   },
   // },
 };
-// app.get('/api/houses', async (req, res) => {
-//   let data = await House.find({}).populate("occupants")
-//   res.status(200).json(data)
-// })
-
-// app.get('/api/users', async (req, res) => {
-//   let data = await User.find({}).populate('house')
-//   res.status(200).json(data)
-// })
 
 module.exports = resolvers;

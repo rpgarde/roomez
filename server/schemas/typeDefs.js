@@ -54,11 +54,11 @@ const typeDefs = gql`
     photo: String
   }
   type Query {
-    house: [House]
-    user: [User]
-    bill: [Bill]
-    chore: [Chore]
-    message: [Message]
+    house(_id: String): [House]
+    user(_id: String): [User]
+    bill(_id: String): [Bill]
+    chore(_id: String): [Chore]
+    message(_id: String): [Message]
   }
 `
 
