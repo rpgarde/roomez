@@ -1,0 +1,53 @@
+const { gql } = require('apollo-server-express');
+
+const typeDefs = gql`
+  type House{
+    _id: ID!
+    address: String!
+    occupants: [User]
+    photo: String!
+    code: String!
+  }
+
+  type User {
+    _id: ID!
+    firstName: String!
+    lastName: String!
+    mobile: String!
+    email: String!
+    password: String!
+    house: House
+  }
+
+  type Query {
+    house: [House]
+    user: [User]
+  }
+`
+
+// const typeDefs = gql`
+//   type Tech {
+//     _id: ID!
+//     name: String!
+//   }
+
+//   type Matchup {
+//     _id: ID!
+//     tech1: String!
+//     tech2: String!
+//     tech1_votes: Int
+//     tech2_votes: Int
+//   }
+
+//   type Query {
+//     tech: [Tech]
+//     matchups(_id: String): [Matchup]
+//   }
+
+//   type Mutation {
+//     createMatchup(tech1: String!, tech2: String!): Matchup
+//     createVote(_id: String!, techNum: Int!): Matchup
+//   }
+// `;
+
+module.exports = typeDefs;
