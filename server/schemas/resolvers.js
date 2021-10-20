@@ -8,6 +8,23 @@ const resolvers = {
     user: async () => {
       return await User.find({}).populate("house")
     },
+    bill: async() => {
+      return await Bill.find({})
+        .populate('createdBy')
+        .populate('assignedTo')
+        .populate('house')
+    },
+    chore: async() => {
+      return await Chore.find({})
+        .populate('createdBy')
+        .populate('assignedTo')
+        .populate('house')
+    },
+    message: async() => {
+      return await Message.find({})
+        .populate('createdBy')
+        .populate('house')
+    }
   },
   // Mutation: {
   //   createMatchup: async (parent, args) => {

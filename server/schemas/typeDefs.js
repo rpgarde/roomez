@@ -4,8 +4,8 @@ const typeDefs = gql`
   type House{
     _id: ID!
     address: String!
-    occupants: [User]
-    photo: String!
+    occupants: [User]!
+    photo: String
     code: String!
   }
 
@@ -18,10 +18,47 @@ const typeDefs = gql`
     password: String!
     house: House
   }
+  
+  type Bill {
+    _id: ID!
+    createdAt: String!
+    name: String!
+    dueAt: String
+    house: House!
+    createdBy: User!
+    assignedTo: User
+    amount: Int!
+    paid: Boolean!
+    paidAt: String
+    photo: String
+  }
 
+  type Chore{
+    _id: ID!
+    createdAt: String!
+    name: String!
+    dueAt: String
+    house: House!
+    createdBy: User!
+    assignedTo: User
+    complete: Boolean!
+    completedAt: String
+    photo: String
+  }
+  type Message{
+    _id: ID!
+    createdAt: String!
+    message: String
+    house: House!
+    createdBy: User!
+    photo: String
+  }
   type Query {
     house: [House]
     user: [User]
+    bill: [Bill]
+    chore: [Chore]
+    message: [Message]
   }
 `
 
