@@ -36,6 +36,29 @@ app.get('/api/users',async (req,res)=>{
     res.status(200).json(data)
 })
 
+app.get('/api/bills',async (req,res)=>{
+    let data = await Bill.find({})
+        .populate('createdBy')
+        .populate('assignedTo')
+        .populate('house')
+    res.status(200).json(data)
+})
+
+app.get('/api/chores',async (req,res)=>{
+    let data = await Chore.find({})
+        .populate('createdBy')
+        .populate('assignedTo')
+        .populate('house')
+    res.status(200).json(data)
+})
+
+app.get('/api/messages',async (req,res)=>{
+    let data = await Message.find({})
+        .populate('createdBy')
+        .populate('house')
+    res.status(200).json(data)
+})
+
 // app.get('/campgrounds',catchAsync(async (req,res) => {
 //     const campgrounds = await Campground.find({});
 //     res.render('campgrounds/index', {campgrounds})

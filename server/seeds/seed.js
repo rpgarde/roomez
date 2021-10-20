@@ -18,6 +18,8 @@ db.once('open',() => {
     console.log('Database Connected')
 })
 
+const sample = (array) => array[Math.floor(Math.random()*array.length)]
+
 const seedDb = async() => {
     // clear db 
     await Bill.deleteMany({})
@@ -29,24 +31,62 @@ const seedDb = async() => {
     console.log('db cleared')
 
     // Create house
-    await House.insertMany(houses)
-    // Store house data
-    let seededHouses = await House.find({})
+    let seededHouses = await House.insertMany(houses)
 
     // Create users
-    await User.insertMany(users)
-
-    // Store user data
-    let seededUsers = await User.find({})
+    let seededUsers = await User.insertMany(users)
 
     // Push user data into house
     await House.findOneAndUpdate({},{$push:{ occupants: seededUsers }})
+    console.log('house seeded')
     // Push house data into user
     await User.updateMany({},{$push:{house:seededHouses[0]}})
+    console.log('users seeded')
 
-    // await Bill.insertMany(bills)
-    // await Chore.insertMany(chores)
-    // await Message.insertMany(messages)
+    for(let i = 0; i<bills.length; i++){
+        const billData = new Bill({
+            createdAt: bills[i].createdAt,
+            name: bills[i].name,
+            dueAt: bills[i].dueAt,
+            house: seededHouses[0],
+            createdBy: sample(seededUsers),
+            assignedTo: sample(seededUsers),
+            amount: bills[i].amount,
+            paid:bills[i].paid,
+            paidAt:bills[i].paidAt,
+            photo:bills[i].photo
+        })
+        await billData.save()
+    }
+    console.log('bills seeded')
+
+    for(let i = 0; i<chores.length; i++){
+        const choreData = new Chore({
+            createdAt: chores[i].createdAt,
+            name: chores[i].name,
+            dueAt: chores[i].dueAt,
+            house: seededHouses[0],
+            createdBy: sample(seededUsers),
+            assignedTo: sample(seededUsers),
+            complete: chores[i].complete,
+            completedAt:chores[i].completedAt,
+            photo:chores[i].photo
+        })
+        await choreData.save()
+    }
+    console.log('chores seeded')
+
+    for(let i = 0; i<messages.length; i++){
+        const messageData = new Message({
+            createdAt: messages[i].createdAt,
+            message: messages[i].message,
+            house: seededHouses[0],
+            createdBy: sample(seededUsers),
+            photo: messages[i].photo
+        })
+        await messageData.save()
+    }
+    console.log('messages seeded')
 
     console.log('DATABASE SEEDED')
 }
