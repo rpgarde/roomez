@@ -5,8 +5,8 @@ function Navigation({ currentPage, handlePageChange }) {
   return (
     <nav className="navbar sticky-top navbar-expand-md navbar-dark">
       <div className="container-fluid">
-        <a className="navbar-brand fw-bold" href="#Landing"
-         onClick={() => handlePageChange('Landing')}
+        <a className="navbar-brand fw-bold" href="/"
+        //  onClick={() => handlePageChange('Landing')}
         >
                 <img src={lightLogo} alt="roomEZ" width="100"/>
         </a>
@@ -17,33 +17,33 @@ function Navigation({ currentPage, handlePageChange }) {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a aria-current="page" href="#about"
+              <a aria-current="page" href="/bills"
                 className={currentPage === 'About' ? 'nav-link active' : 'nav-link'}
-                onClick={() => handlePageChange('About')}
+                // onClick={() => handlePageChange('About')}
               >
                 Bills
               </a>
             </li>
             <li className="nav-item">
-              <a aria-current="page" href="#portfolio"
+              <a aria-current="page" href="/chores"
                 className={currentPage === 'Portfolio' ? 'nav-link active' : 'nav-link'}
-                onClick={() => handlePageChange('Portfolio')}
+                // onClick={() => handlePageChange('Portfolio')}
               >
                 Chores
               </a>
             </li>          
             <li className="nav-item">
-              <a aria-current="page" href="#resume"
+              <a aria-current="page" href="/messages"
                 className={currentPage === 'Resume' ? 'nav-link active' : 'nav-link'}
-                onClick={() => handlePageChange('Resume')}
+                // onClick={() => handlePageChange('Resume')}
               >
                 Messages
               </a>
             </li>
             <li className="nav-item">
-              <a aria-current="page" href="#contact"
+              <a aria-current="page" href="/contact"
                 className={currentPage === 'Contact' ? 'nav-link active' : 'nav-link'}
-                onClick={() => handlePageChange('Contact')}
+                // onClick={() => handlePageChange('Contact')}
               >
                 Contact Us
               </a>

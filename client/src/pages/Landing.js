@@ -1,9 +1,9 @@
 import React from 'react';
-import hero from '../../images/hero.jpg'
-import lightLogo from '../../images/light-logo.png'
-import message from '../../images/message.jpg'
-import task from '../../images/task.jpg'
-import bill from '../../images/bill.jpg'
+import hero from '../images/hero.jpg'
+import lightLogo from '../images/light-logo.png'
+import message from '../images/message.jpg'
+import task from '../images/task.jpg'
+import bill from '../images/bill.jpg'
 
 const bgImageStyle = {
   backgroundImage: `url(${hero})`,
