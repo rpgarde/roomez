@@ -34,7 +34,7 @@ const seedDb = async() => {
     let seededHouses = await House.insertMany(houses)
 
     // Create users
-    let seededUsers = await User.insertMany(users)
+    let seededUsers = await User.create(users)
 
     // Push user data into house
     await House.findOneAndUpdate({},{$push:{ occupants: seededUsers }})

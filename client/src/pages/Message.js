@@ -21,6 +21,7 @@ console.log(messages)
         createdAt = {message.createdAt}
         photo = {message.photo}
         _id = {message.id}
+        house = {message.house.address}
         />
         ))}
         </div>

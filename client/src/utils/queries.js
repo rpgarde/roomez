@@ -20,16 +20,15 @@ export const QUERY_HOUSE = gql`
 export const QUERY_USER = gql`
  query user($_id: String) {
    user(_id: $_id) {
-     _id
-     address
-     photo
-     code
-     occupants{
-       firstName
-       lastName
-       mobile
-       email
-     }
+    _id
+    firstName
+    lastName
+    email
+    house {
+      _id
+      address
+      photo
+    }
    }
 }
 `;
@@ -43,6 +42,7 @@ query bill($_id: String) {
     dueAt
     house {
       address
+      _id
     }
     createdBy {
       firstName
@@ -66,6 +66,7 @@ export const QUERY_CHORE = gql`
     dueAt
     house {
       address
+      _id
     }
     createdBy {
       firstName
@@ -85,6 +86,10 @@ export const QUERY_MESSAGE = gql`
       _id
       createdAt
       message
+      house{
+        address
+        _id
+      }
       createdBy{
         firstName
       }
@@ -92,3 +97,20 @@ export const QUERY_MESSAGE = gql`
     }
   }
    `;
+
+
+export const QUERY_ME = gql`
+query me {
+  me {
+    _id
+    firstName
+    lastName
+    email
+    mobile
+    house {
+      _id
+      address
+    }
+  }
+}
+`;

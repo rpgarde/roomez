@@ -53,38 +53,32 @@ const typeDefs = gql`
     createdBy: User!
     photo: String
   }
+  
+  type Auth{
+    token: ID!
+    user: User
+  }
+  
   type Query {
     house(_id: String): [House]
     user(_id: String): [User]
     bill(_id: String): [Bill]
     chore(_id: String): [Chore]
     message(_id: String): [Message]
+    me: User
+  }
+
+  type Mutation{
+    addUser(
+      firstName: String!, 
+      lastName: String!, 
+      email: String!, 
+      mobile: String!,
+      password: String!,
+      photo: String!): Auth
+    login(email: String!, password: String!): Auth
   }
 `
 
-// const typeDefs = gql`
-//   type Tech {
-//     _id: ID!
-//     name: String!
-//   }
-
-//   type Matchup {
-//     _id: ID!
-//     tech1: String!
-//     tech2: String!
-//     tech1_votes: Int
-//     tech2_votes: Int
-//   }
-
-//   type Query {
-//     tech: [Tech]
-//     matchups(_id: String): [Matchup]
-//   }
-
-//   type Mutation {
-//     createMatchup(tech1: String!, tech2: String!): Matchup
-//     createVote(_id: String!, techNum: Int!): Matchup
-//   }
-// `;
 
 module.exports = typeDefs;
