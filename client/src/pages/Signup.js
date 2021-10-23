@@ -8,9 +8,12 @@ import Auth from '../utils/auth';
 
 const Signup = () => {
   const [formState, setFormState] = useState({
-    username: '',
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
+    mobile: '',
+    photo: ''
   });
   const [addUser, { error, data }] = useMutation(ADD_USER);
 
@@ -53,10 +56,18 @@ const Signup = () => {
               <form onSubmit={handleFormSubmit}>
                 <input
                   className="form-input"
-                  placeholder="Your username"
-                  name="username"
+                  placeholder="Your first name"
+                  name="firstName"
                   type="text"
-                  value={formState.name}
+                  value={formState.firstName}
+                  onChange={handleChange}
+                />
+                <input
+                  className="form-input"
+                  placeholder="Your last name"
+                  name="lastName"
+                  type="text"
+                  value={formState.lastName}
                   onChange={handleChange}
                 />
                 <input
@@ -69,10 +80,26 @@ const Signup = () => {
                 />
                 <input
                   className="form-input"
+                  placeholder="Your mobile number"
+                  name="mobile"
+                  type="text"
+                  value={formState.mobile}
+                  onChange={handleChange}
+                />
+                <input
+                  className="form-input"
                   placeholder="******"
                   name="password"
                   type="password"
                   value={formState.password}
+                  onChange={handleChange}
+                />
+                                <input
+                  className="form-input"
+                  placeholder="scratch"
+                  name="photo"
+                  type="text"
+                  value={formState.photo}
                   onChange={handleChange}
                 />
                 <button
