@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import ImageUpload from '../components/ImageUpload'
 
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
@@ -102,6 +103,9 @@ const Signup = () => {
                   value={formState.photo}
                   onChange={handleChange}
                 />
+                <div>
+                <ImageUpload />
+                </div>
                 <button
                   className="btn btn-block btn-primary"
                   style={{ cursor: 'pointer' }}
