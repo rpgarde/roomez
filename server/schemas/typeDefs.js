@@ -1,6 +1,7 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
+  scalar Upload 
   type House{
     _id: ID!
     address: String!
@@ -59,6 +60,10 @@ const typeDefs = gql`
     token: ID!
     user: User
   }
+
+  type File {
+    url: String!
+  }
   
   type Query {
     house(_id: String): [House]
@@ -77,7 +82,8 @@ const typeDefs = gql`
       mobile: String!,
       password: String!,
       photo: String!): Auth
-    login(email: String!, password: String!): Auth
+      login(email: String!, password: String!): Auth
+      uploadFile(file: Upload!): File!        
   }
 `
 

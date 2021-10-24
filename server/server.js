@@ -1,6 +1,10 @@
 const mongoose = require('mongoose')
 const express = require('express')
 const { ApolloServer } = require('apollo-server-express')
+const {
+  GraphQLUpload,
+  graphqlUploadExpress, // A Koa implementation is also exported.
+} = require('graphql-upload');
 const { typeDefs, resolvers } = require('./schemas')
 const PORT = process.env.PORT || 3001;
 mongoose.connect('mongodb://localhost:27017/roomez', {})
@@ -25,6 +29,8 @@ app.use(morgan('tiny'))
 app.use(express.urlencoded({ extended: true }))
 
 app.use(express.static("public"));
+
+app.use(graphqlUploadExpress());
 
 db.on('error', console.error.bind(console, 'connection error:'));
 
