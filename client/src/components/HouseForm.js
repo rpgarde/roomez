@@ -2,22 +2,51 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const HouseForm = (props) => {
-  const [houseFormState, setHouseFormState] = useState({
-    houseAddress: '',
-    housePhoto: '',
-    houseCode: ''
-  });
+  // const [houseFormState, setHouseFormState] = useState({
+  //   houseAddress: '',
+  //   housePhoto: '',
+  //   houseCode: ''
+  // });
   
+  const [houseAddress, setHouseAddress] = useState('');
+  const [houseCode, setHouseCode] = useState('');
+
   const [houseState, setHouseState] = useState('create')
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
+  const handleCodeChange = (event)=> {
+    const {value} = event.target;
 
-    setHouseFormState({
-      ...houseFormState,
-      [name]: value,
-    });
-  };
+    setHouseCode(value)
+
+    props.handleHouseForm({
+      houseCode: value,
+    })
+  }
+
+  const handleAddressChange = (event)=> {
+    const {value} = event.target;
+
+    setHouseAddress(value)
+
+    props.handleHouseForm({
+      houseAddress: value,
+    })
+  }
+
+
+  // const handleChange = (event) => {
+  //   const { name, value } = event.target;
+
+  //   setHouseFormState({
+  //     ...houseFormState,
+  //     [name]: value,
+  //   });
+
+  //   props.handleHouseForm({
+  //     ...houseFormState,
+  //     [name]: value,
+  //   })
+  // };
 
   return (
     <div>
@@ -36,9 +65,9 @@ const HouseForm = (props) => {
               className="form-control"
               name="houseCode"
               id="houseCode"
-              value={houseFormState.houseCode}
+              value={houseCode}
               placeholder="code you should have gotten"
-              onChange={handleChange}
+              onChange={handleCodeChange}
               />
           </div>
           ) : (
@@ -50,8 +79,8 @@ const HouseForm = (props) => {
                   id="address"
                   placeholder="address"
                   name="houseAddress"
-                  value={houseFormState.houseAddress}
-                  onChange={handleChange}
+                  value={houseAddress}
+                  onChange={handleAddressChange}
                 />
               </div>
               <div className = "mb-3">
@@ -60,9 +89,9 @@ const HouseForm = (props) => {
                   className="form-control"
                   id="houseCode"
                   name="houseCode"
-                  value={houseFormState.houseCode}
+                  value={houseCode}
                   placeholder="code to share with your friends"
-                  onChange={handleChange}
+                  onChange={handleCodeChange}
                 />
               </div>
             </div>

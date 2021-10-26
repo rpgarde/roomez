@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { useMutation, gql } from '@apollo/client'
 
 const UPLOAD_FILE = gql`
@@ -9,7 +9,9 @@ const UPLOAD_FILE = gql`
     }
 `
 
-export default function UploadForm() {
+export default function UploadForm(props) {
+    const [fileState,SetFileState] = useState('')
+
     const [uploadFile, { error }] = useMutation(UPLOAD_FILE, {
         onCompleted: data => console.log(data)
     })
@@ -25,10 +27,16 @@ export default function UploadForm() {
     
 
     const handleFileChange = async (e) => {
+        e.preventDefault()
         try {
-            const file = e.target.files[0]
+            const file = await e.target.files[0]
             if (!file) return
             await uploadFile({ variables: { file } })
+            SetFileState(file.name)
+            props.handleUserPhoto({
+                photo:file.name
+            })
+            console.log(file.name)
         }
         catch(err){
             console.error(err)

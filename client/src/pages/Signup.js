@@ -15,9 +15,11 @@ const Signup = () => {
     email: '',
     password: '',
     mobile: '',
-    photo: ''
+    photo: '',
+    houseAddress: '',
+    houseCode: ''
   });
-  const [addUser, { error, data }] = useMutation(ADD_USER);
+
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -28,13 +30,31 @@ const Signup = () => {
     });
   };
 
+  const [addUser, { error, data }] = useMutation(ADD_USER);
+
+  const handleHouseForm = (code)=>{
+    setFormState({
+      ...formState,
+      houseAddress: code.houseAddress ? code.houseAddress : formState.houseAddress,
+      houseCode: code.houseCode ? code.houseCode : formState.houseCode,
+    })  
+  }
+
+  const handleUserPhoto = (photo)=>{
+    setFormState({
+      ...formState,
+      userPhoto: photo.photo ? photo.photo : formState.photo
+    })
+  }
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-
+    console.log('LOG FORM STATE')
+    console.log(formState)
     const data = new FormData(event.target);
 
     const value = Object.fromEntries(data.entries());
-
+    console.log('LOG FORM DATA API')
     console.log({ value });
 
     // try {
@@ -122,10 +142,12 @@ const Signup = () => {
                 />
                 </div>
                 <div className = "mb-3">
-                  <UploadForm />
+                  <UploadForm 
+                   handleUserPhoto={handleUserPhoto}
+                  />
                 </div>
                 <HouseForm
-                  handleChange={handleChange}
+                  handleHouseForm={handleHouseForm}
                 />
                 <button
                   className="btn btn-primary"
