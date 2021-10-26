@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import ImageUpload from '../components/ImageUpload'
+import UploadForm from '../components/UploadForm'
+import HouseForm from '../components/HouseForm'
 
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
@@ -95,17 +96,10 @@ const Signup = () => {
                   value={formState.password}
                   onChange={handleChange}
                 />
-                                <input
-                  className="form-input"
-                  placeholder="scratch"
-                  name="photo"
-                  type="text"
-                  value={formState.photo}
-                  onChange={handleChange}
-                />
                 <div>
-                <ImageUpload />
+                  <UploadForm />
                 </div>
+                  <HouseForm/>
                 <button
                   className="btn btn-block btn-primary"
                   style={{ cursor: 'pointer' }}

@@ -18,7 +18,7 @@ import Message from './pages/Message';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Profile from './pages/Profile'
-import UploadForm from './components/fileUpload'
+import UploadForm from './components/UploadForm'
 
 
 import './App.css'

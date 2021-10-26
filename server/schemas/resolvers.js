@@ -55,7 +55,7 @@ const resolvers = {
       return { token, user };
     },
     login: async (parent, { email, password }) => {
-      const user = await User.findOne({ email });
+      const user = await User.findOne({ email }).populate("house");
 
       if (!user) {
         throw new AuthenticationError('No user found with this email address');
@@ -66,9 +66,10 @@ const resolvers = {
       if (!correctPw) {
         throw new AuthenticationError('Incorrect credentials');
       }
-
+      console.log(user)
       const token = signToken(user);
-
+      console.log('here is the token')
+      console.log(token)
       return { token, user };
     },
     uploadFile: async (parent, { file }) => {
@@ -77,7 +78,7 @@ const resolvers = {
       // Invoking the `createReadStream` will return a Readable Stream.
       // See https://nodejs.org/api/stream.html#stream_readable_streams
       const stream = createReadStream();
-      const pathName = path.join(__dirname,'..','..',`client/src/images/${filename}`)
+      const pathName = path.join(__dirname,'..','..',`client/public/images/${filename}`)
       console.log(pathName)
       // This is purely for demonstration purposes and will overwrite the
       // local-file-output.txt in the current working directory on EACH upload.

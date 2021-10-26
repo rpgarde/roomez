@@ -1,4 +1,8 @@
 const { gql } = require('apollo-server-express');
+const {
+  GraphQLUpload,
+  graphqlUploadExpress, // A Koa implementation is also exported.
+} = require('graphql-upload');
 
 const typeDefs = gql`
   scalar Upload 

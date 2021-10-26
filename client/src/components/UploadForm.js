@@ -36,8 +36,8 @@ export default function UploadForm() {
     }
     return (
         <div>
-            <h1>Upload File</h1>
-            <input type="file" onChange={handleFileChange} />
+            <label class="form-label" for="fileUpload">Upload a Photo</label>
+            <input name = "photo" type="file" class="form-control" id="fileUpload" onChange={handleFileChange}  />
         </div>
     )
 }
