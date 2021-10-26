@@ -49,8 +49,11 @@ const resolvers = {
   },
 
   Mutation: {
-    addUser: async (parent, args) => {
+    addUserAndHouse: async (parent, args) => {
       const user = await User.create(args);
+      // create a new house 
+      // if(args.)
+      // user with house data -> token
       const token = signToken(user);
       return { token, user };
     },

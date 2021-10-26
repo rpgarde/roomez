@@ -30,22 +30,27 @@ const Signup = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
 
-    try {
-      const { data } = await addUser({
-        variables: { ...formState },
-      });
+    const data = new FormData(event.target);
 
-      Auth.login(data.addUser.token);
-    } catch (e) {
-      console.error(e);
-    }
+    const value = Object.fromEntries(data.entries());
+
+    console.log({ value });
+
+    // try {
+    //   const { data } = await addUser({
+    //     variables: { ...formState },
+    //   });
+
+    //   Auth.login(data.addUser.token);
+    // } catch (e) {
+    //   console.error(e);
+    // }
   };
 
   return (
-    <main className="flex-row justify-center mb-4">
-      <div className="col-12 col-lg-10">
+    <div className="row">
+      <div className="col-6 offset-3">
         <div className="card">
           <h4 className="card-header bg-dark text-light p-2">Sign Up</h4>
           <div className="card-body">
@@ -55,53 +60,75 @@ const Signup = () => {
                 <Link to="/">back to the homepage.</Link>
               </p>
             ) : (
-              <form onSubmit={handleFormSubmit}>
+              <form className="form" onSubmit={handleFormSubmit}>
+                <div className = "mb-3">
+                  <label className="form-label" for="firstName">First Name</label>
+                  <input
+                    className="form-control"
+                    placeholder="Your first name"
+                    id="firstName"
+                    name="firstName"
+                    type="text"
+                    value={formState.firstName}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className = "mb-3">
+                <label className="form-label" for="lastName">Last Name</label>
                 <input
-                  className="form-input"
-                  placeholder="Your first name"
-                  name="firstName"
-                  type="text"
-                  value={formState.firstName}
-                  onChange={handleChange}
-                />
-                <input
-                  className="form-input"
+                  className="form-control"
                   placeholder="Your last name"
                   name="lastName"
+                  id="lastName"
                   type="text"
                   value={formState.lastName}
                   onChange={handleChange}
                 />
+                </div>
+                <div className = "mb-3">
+                <label className="form-label" for="email">Email</label>
                 <input
-                  className="form-input"
+                  className="form-control"
                   placeholder="Your email"
                   name="email"
+                  id="email"
                   type="email"
                   value={formState.email}
                   onChange={handleChange}
                 />
+                </div>
+                <div className = "mb-3">
+                <label className="form-label" for="password">Password</label>
                 <input
-                  className="form-input"
-                  placeholder="Your mobile number"
-                  name="mobile"
-                  type="text"
-                  value={formState.mobile}
-                  onChange={handleChange}
-                />
-                <input
-                  className="form-input"
+                  className="form-control"
                   placeholder="******"
                   name="password"
+                  id="password"
                   type="password"
                   value={formState.password}
                   onChange={handleChange}
                 />
-                <div>
+                </div>
+                <div className = "mb-3">
+                <label className="form-label" for="mobile">Mobile</label>
+                <input
+                  className="form-control"
+                  placeholder="Your mobile number"
+                  name="mobile"
+                  id="mobile"
+                  type="text"
+                  value={formState.mobile}
+                  onChange={handleChange}
+                />
+                </div>
+                <div className = "mb-3">
                   <UploadForm />
                 </div>
-                  <HouseForm/>
+                <HouseForm
+                  handleChange={handleChange}
+                />
                 <button
-                  className="btn btn-block btn-primary"
+                  className="btn btn-primary"
                   style={{ cursor: 'pointer' }}
                   type="submit"
                 >
@@ -118,7 +145,7 @@ const Signup = () => {
           </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 };
 

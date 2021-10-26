@@ -79,15 +79,15 @@ const typeDefs = gql`
   }
 
   type Mutation{
-    addUser(
+    addUserAndHouse(
       firstName: String!, 
       lastName: String!, 
       email: String!, 
       mobile: String!,
       password: String!,
       photo: String!): Auth
-      login(email: String!, password: String!): Auth
-      uploadFile(file: Upload!): File!        
+    login(email: String!, password: String!): Auth
+    uploadFile(file: Upload!): File!        
   }
 `
 
