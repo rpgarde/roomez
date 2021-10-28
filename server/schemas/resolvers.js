@@ -20,38 +20,53 @@ const resolvers = {
       const params = _id ? { _id } : {};
       return await User.find(params).populate("house")
     },
-    bill: async (_, { _id }) => {
+    bill: async (_, { _id }, context) => {
       const params = _id ? { _id } : {};
-      return await Bill.find(params)
-        .populate('createdBy')
-        .populate('assignedTo')
-        .populate('house')
+      if (context.user) {
+        const houseId = context.user.house._id
+        return await Bill.find(params)
+          .populate('createdBy')
+          .populate('assignedTo')
+          .populate('house')
+          .where('._id').in('house').equals(houseId)
+      }
+      throw new AuthenticationError('You need to be logged in to see this')
     },
-    chore: async (_, { _id }) => {
+    chore: async (_, { _id }, context) => {
       const params = _id ? { _id } : {};
-      return await Chore.find(params)
-        .populate('createdBy')
-        .populate('assignedTo')
-        .populate('house')
+      if (context.user) {
+        const houseId = context.user.house._id
+        return await Chore.find(params)
+          .populate('createdBy')
+          .populate('assignedTo')
+          .populate('house')
+          .where('._id').in('house').equals(houseId)
+      }
+      throw new AuthenticationError('You need to be logged in to see this')
     },
-    message: async (_, { _id }) => {
+    message: async (_, { _id }, context) => {
       const params = _id ? { _id } : {};
-      return await Message.find(params)
-        .populate('createdBy')
-        .populate('house')
+      if (context.user) {
+        const houseId = context.user.house._id
+        return await Message.find(params)
+          .populate('createdBy')
+          .populate('house')
+          .where('._id').in('house').equals(houseId)
+      }
+      throw new AuthenticationError('You need to be logged in to see this')
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('thoughts');
+        return User.findOne({ _id: context.user._id });
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError('You need to be logged in to see this');
     }
   },
 
   Mutation: {
     addUserAndHouse: async (parent, args) => {
       console.log(args)
-      const {firstName, lastName, email, password, mobile, photo, address, code } = args
+      const { firstName, lastName, email, password, mobile, photo, address, code } = args
 
       const userData = {
         firstName: firstName,
@@ -66,22 +81,14 @@ const resolvers = {
         address: address,
         code: code
       }
-
       console.log(houseData)
-
       let user = await User.create(args);
-
       const newHouse = await House.create(houseData);
-
-      const updatedUser = await User.findOneAndUpdate({ email },{$push:{house:newHouse}})
-
-      const updatedHouse = await House.findOneAndUpdate({ address },{$push:{ occupants: user }})
-
+      await User.findOneAndUpdate({ email }, { $push: { house: newHouse } })
+      await House.findOneAndUpdate({ address }, { $push: { occupants: user } })
       user = await User.findOne({ email }).populate("house");
-      
-      // create a new house 
-      // if(args.)
-      // user with house data -> token
+
+      // TODO: Add a condition where if the address is null, look for a current house. 
 
       const token = signToken(user);
       console.log(token)
@@ -112,7 +119,7 @@ const resolvers = {
       // Invoking the `createReadStream` will return a Readable Stream.
       // See https://nodejs.org/api/stream.html#stream_readable_streams
       const stream = createReadStream();
-      const pathName = path.join(__dirname,'..','..',`client/public/images/${filename}`)
+      const pathName = path.join(__dirname, '..', '..', `client/public/images/${filename}`)
       console.log(pathName)
       // This is purely for demonstration purposes and will overwrite the
       // local-file-output.txt in the current working directory on EACH upload.
@@ -120,7 +127,7 @@ const resolvers = {
       await stream.pipe(out);
       // await finished(out);
 
-      return { url: `http://locallhost:3001/images/${filename}` };
+      return { url: pathName };
     },
   },
 };
