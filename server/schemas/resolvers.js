@@ -6,7 +6,6 @@ const {
   GraphQLUpload,
   graphqlUploadExpress, // A Koa implementation is also exported.
 } = require('graphql-upload');
-const { Thought } = require('../../../usyd-syd-fsf-pt-05-2021-u-c/22-State/Day2-Mon/18-Stu_JWT-Review/Unsolved/server/models');
 // const { finished } = require('stream/promises');
 
 const resolvers = {
@@ -135,17 +134,19 @@ const resolvers = {
     addMessage: async (parent,args,context) =>{
       console.log('received message!')
       if (context.user) {
+        console.log(context.user)
         const message = await Message.create(args)
         console.log(message)
         const messageId = message._id
-        console.log(message._id)
-        const userData = await User.findById(context.user._id)
+        console.log('message ID: '+messageId)
+        let userData = await User.findOne({id:context.user._id}).exec()
+        console.log('context user id: '+context.user._id)
         console.log(userData)
-        const houseData = await House.findById(context.user.house._id)
+        let houseData = await House.findOne({id:context.user.house._id}).exec()
         console.log(houseData)
-        const updatedMessage = await Message.findOneAndUpdate({_id:messageId}, { house: houseData, createdBy: userData }, {new:true} )
-        console.log(updatedMessage)
-        return updatedMessage;
+        let messageData = await Message.findById(messageId)
+        console.log(messageData)
+        return Message.findOneAndUpdate({_id: messageId}, { house: houseData, createdBy: userData }, {new:true} )
       }
       throw new AuthenticationError('You need to be logged in!');
     }

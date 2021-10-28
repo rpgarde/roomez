@@ -24,6 +24,7 @@ const MessageForm = () => {
       });
 
       setMessageText('');
+      window.location.reload(false);
     } catch (err) {
       console.error(err);
     }
@@ -39,7 +40,7 @@ const MessageForm = () => {
   };
 
   return (
-    <div>
+    <div className = "m-3">
       <h3>Leave a message</h3>
 
       {Auth.loggedIn() ? (
