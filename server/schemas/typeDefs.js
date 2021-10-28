@@ -16,11 +16,11 @@ const typeDefs = gql`
 
   type User {
     _id: ID!
-    firstName: String!
-    lastName: String!
-    mobile: String!
-    email: String!
-    password: String!
+    firstName: String
+    lastName: String
+    mobile: String
+    email: String
+    password: String
     house: House
     photo: String
   }
@@ -30,11 +30,11 @@ const typeDefs = gql`
     createdAt: String!
     name: String!
     dueAt: String
-    house: House!
-    createdBy: User!
+    house: House
+    createdBy: User
     assignedTo: User
     amount: Int!
-    paid: Boolean!
+    paid: Boolean
     paidAt: String
     photo: String
   }
@@ -44,8 +44,8 @@ const typeDefs = gql`
     createdAt: String!
     name: String!
     dueAt: String
-    house: House!
-    createdBy: User!
+    house: House
+    createdBy: User
     assignedTo: User
     complete: Boolean!
     completedAt: String
@@ -55,8 +55,8 @@ const typeDefs = gql`
     _id: ID!
     createdAt: String!
     message: String
-    house: House!
-    createdBy: User!
+    house: House
+    createdBy: User
     photo: String
   }
   
@@ -90,7 +90,22 @@ const typeDefs = gql`
       code: String!     
       ): Auth
     login(email: String!, password: String!): Auth
-    uploadFile(file: Upload!): File!        
+    uploadFile(file: Upload!): File!
+    addMessage(
+      message: String!
+      photo: String
+      ): Message 
+    addBill(
+      name: String!
+      amount: Int!
+      photo: String
+      dueAt: String
+      ): Bill
+    addChore(
+      name: String!
+      dueAt: String
+      photo: String 
+    ): Chore
   }
 `
 

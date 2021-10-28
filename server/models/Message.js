@@ -16,8 +16,7 @@ const MessageSchema = new Schema({
     },
     createdBy:{
         type:Schema.Types.ObjectId,
-        ref:"User",
-        required:true
+        ref:"User"
     },
     photo:{
         type:String

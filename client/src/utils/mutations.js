@@ -48,3 +48,19 @@ export const ADD_USER_AND_HOUSE = gql`
     }
   }
 `;
+
+
+export const ADD_MESSAGE = gql`
+  mutation addMessage(      
+      $message: String!
+      $photo: String
+) {
+    addMessage(message: $message, photo: $photo) {
+      _id
+      createdAt
+      message
+      createdBy {firstName}
+      photo
+    }
+  }
+`;

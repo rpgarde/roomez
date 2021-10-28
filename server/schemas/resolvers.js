@@ -6,6 +6,7 @@ const {
   GraphQLUpload,
   graphqlUploadExpress, // A Koa implementation is also exported.
 } = require('graphql-upload');
+const { Thought } = require('../../../usyd-syd-fsf-pt-05-2021-u-c/22-State/Day2-Mon/18-Stu_JWT-Review/Unsolved/server/models');
 // const { finished } = require('stream/promises');
 
 const resolvers = {
@@ -46,6 +47,7 @@ const resolvers = {
     },
     message: async (_, { _id }, context) => {
       const params = _id ? { _id } : {};
+      console.log(context.user)
       if (context.user) {
         const houseId = context.user.house._id
         return await Message.find(params)
@@ -129,6 +131,24 @@ const resolvers = {
 
       return { url: pathName };
     },
+
+    addMessage: async (parent,args,context) =>{
+      console.log('received message!')
+      if (context.user) {
+        const message = await Message.create(args)
+        console.log(message)
+        const messageId = message._id
+        console.log(message._id)
+        const userData = await User.findById(context.user._id)
+        console.log(userData)
+        const houseData = await House.findById(context.user.house._id)
+        console.log(houseData)
+        const updatedMessage = await Message.findOneAndUpdate({_id:messageId}, { house: houseData, createdBy: userData }, {new:true} )
+        console.log(updatedMessage)
+        return updatedMessage;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    }
   },
 };
 

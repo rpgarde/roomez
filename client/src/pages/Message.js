@@ -2,6 +2,7 @@ import React from 'react';
 import {useQuery} from '@apollo/client'
 
 import MessageCard from '../components/MessageCard'
+import MessageForm from '../components/MessageForm'
 
 import { QUERY_MESSAGE } from '../utils/queries';
 
@@ -13,7 +14,8 @@ console.log(messages)
     return (
         <div>
         <h1 className = "text-center mb-3 fw-bold">Messages</h1>
-        <div className>
+        <div>
+        <MessageForm />
         {messages.map((message)=>(
         <MessageCard
         name = {message.createdBy.firstName}

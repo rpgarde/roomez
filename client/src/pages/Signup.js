@@ -51,11 +51,6 @@ const Signup = () => {
     event.preventDefault();
     console.log('LOG FORM STATE')
     console.log(formState)
-    const data = new FormData(event.target);
-
-    const value = Object.fromEntries(data.entries());
-    console.log('LOG FORM DATA API')
-    console.log({ value });
 
     try {
       const { data } = await addUserAndHouse({
