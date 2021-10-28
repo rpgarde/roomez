@@ -4,7 +4,7 @@ import UploadForm from '../components/UploadForm'
 import HouseForm from '../components/HouseForm'
 
 import { useMutation } from '@apollo/client';
-import { ADD_USER } from '../utils/mutations';
+import { ADD_USER_AND_HOUSE } from '../utils/mutations';
 
 import Auth from '../utils/auth';
 
@@ -16,8 +16,8 @@ const Signup = () => {
     password: '',
     mobile: '',
     photo: '',
-    houseAddress: '',
-    houseCode: ''
+    address: '',
+    code: ''
   });
 
 
@@ -30,20 +30,20 @@ const Signup = () => {
     });
   };
 
-  const [addUser, { error, data }] = useMutation(ADD_USER);
+  const [addUserAndHouse, { error, data }] = useMutation(ADD_USER_AND_HOUSE);
 
   const handleHouseForm = (code)=>{
     setFormState({
       ...formState,
-      houseAddress: code.houseAddress ? code.houseAddress : formState.houseAddress,
-      houseCode: code.houseCode ? code.houseCode : formState.houseCode,
+      address: code.address ? code.address : formState.address,
+      code: code.code ? code.code : formState.code,
     })  
   }
 
   const handleUserPhoto = (photo)=>{
     setFormState({
       ...formState,
-      userPhoto: photo.photo ? photo.photo : formState.photo
+      photo: photo.photo ? photo.photo : formState.photo
     })
   }
 
@@ -57,15 +57,15 @@ const Signup = () => {
     console.log('LOG FORM DATA API')
     console.log({ value });
 
-    // try {
-    //   const { data } = await addUser({
-    //     variables: { ...formState },
-    //   });
+    try {
+      const { data } = await addUserAndHouse({
+        variables: { ...formState },
+      });
 
-    //   Auth.login(data.addUser.token);
-    // } catch (e) {
-    //   console.error(e);
-    // }
+      Auth.login(data.addUserAndHouse.token);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
@@ -82,7 +82,7 @@ const Signup = () => {
             ) : (
               <form className="form" onSubmit={handleFormSubmit}>
                 <div className = "mb-3">
-                  <label className="form-label" for="firstName">First Name</label>
+                  <label className="form-label" htmlFor="firstName">First Name</label>
                   <input
                     className="form-control"
                     placeholder="Your first name"
@@ -94,7 +94,7 @@ const Signup = () => {
                   />
                 </div>
                 <div className = "mb-3">
-                <label className="form-label" for="lastName">Last Name</label>
+                <label className="form-label" htmlFor="lastName">Last Name</label>
                 <input
                   className="form-control"
                   placeholder="Your last name"
@@ -106,7 +106,7 @@ const Signup = () => {
                 />
                 </div>
                 <div className = "mb-3">
-                <label className="form-label" for="email">Email</label>
+                <label className="form-label" htmlFor="email">Email</label>
                 <input
                   className="form-control"
                   placeholder="Your email"
@@ -118,7 +118,7 @@ const Signup = () => {
                 />
                 </div>
                 <div className = "mb-3">
-                <label className="form-label" for="password">Password</label>
+                <label className="form-label" htmlFor="password">Password</label>
                 <input
                   className="form-control"
                   placeholder="******"
@@ -130,7 +130,7 @@ const Signup = () => {
                 />
                 </div>
                 <div className = "mb-3">
-                <label className="form-label" for="mobile">Mobile</label>
+                <label className="form-label" htmlFor="mobile">Mobile</label>
                 <input
                   className="form-control"
                   placeholder="Your mobile number"

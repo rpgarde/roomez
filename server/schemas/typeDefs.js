@@ -85,7 +85,10 @@ const typeDefs = gql`
       email: String!, 
       mobile: String!,
       password: String!,
-      photo: String!): Auth
+      photo: String!
+      address: String!,
+      code: String!     
+      ): Auth
     login(email: String!, password: String!): Auth
     uploadFile(file: Upload!): File!        
   }

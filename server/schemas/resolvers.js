@@ -50,12 +50,43 @@ const resolvers = {
 
   Mutation: {
     addUserAndHouse: async (parent, args) => {
-      const user = await User.create(args);
+      console.log(args)
+      const {firstName, lastName, email, password, mobile, photo, address, code } = args
+
+      const userData = {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password,
+        mobile: mobile,
+        photo: photo
+      }
+      console.log(userData)
+      const houseData = {
+        address: address,
+        code: code
+      }
+
+      console.log(houseData)
+
+      let user = await User.create(args);
+
+      const newHouse = await House.create(houseData);
+
+      const updatedUser = await User.findOneAndUpdate({ email },{$push:{house:newHouse}})
+
+      const updatedHouse = await House.findOneAndUpdate({ address },{$push:{ occupants: user }})
+
+      user = await User.findOne({ email }).populate("house");
+      
       // create a new house 
       // if(args.)
       // user with house data -> token
+
       const token = signToken(user);
+      console.log(token)
       return { token, user };
+
     },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email }).populate("house");

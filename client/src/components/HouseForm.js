@@ -8,8 +8,8 @@ const HouseForm = (props) => {
   //   houseCode: ''
   // });
   
-  const [houseAddress, setHouseAddress] = useState('');
-  const [houseCode, setHouseCode] = useState('');
+  const [address, setHouseAddress] = useState('');
+  const [code, setHouseCode] = useState('');
 
   const [houseState, setHouseState] = useState('create')
 
@@ -19,7 +19,7 @@ const HouseForm = (props) => {
     setHouseCode(value)
 
     props.handleHouseForm({
-      houseCode: value,
+      code: value,
     })
   }
 
@@ -29,7 +29,7 @@ const HouseForm = (props) => {
     setHouseAddress(value)
 
     props.handleHouseForm({
-      houseAddress: value,
+      address: value,
     })
   }
 
@@ -60,12 +60,12 @@ const HouseForm = (props) => {
       {
         houseState === 'join' ?
           (<div className = "mb-3">
-          <label className = "form-label" for="houseCode">Code you should have gotten from your housemate</label>
+          <label className = "form-label" htmlFor="houseCode">Code you should have gotten from your housemate</label>
             <input
               className="form-control"
               name="houseCode"
               id="houseCode"
-              value={houseCode}
+              value={code}
               placeholder="code you should have gotten"
               onChange={handleCodeChange}
               />
@@ -73,23 +73,23 @@ const HouseForm = (props) => {
           ) : (
             <div>
               <div className = "mb-3">
-              <label className = "form-label" for="houseCode">Your property's address</label>
+              <label className = "form-label" htmlFor="houseCode">Your property's address</label>
                 <input
                   className="form-control"
                   id="address"
                   placeholder="address"
                   name="houseAddress"
-                  value={houseAddress}
+                  value={address}
                   onChange={handleAddressChange}
                 />
               </div>
               <div className = "mb-3">
-                <label className = "form-label" for="houseCode">Create a house code to share with your friends</label>
+                <label className = "form-label" htmlFor="houseCode">Create a house code to share with your friends</label>
                 <input
                   className="form-control"
                   id="houseCode"
                   name="houseCode"
-                  value={houseCode}
+                  value={code}
                   placeholder="code to share with your friends"
                   onChange={handleCodeChange}
                 />
