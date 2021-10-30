@@ -6,7 +6,7 @@ import { ADD_MESSAGE } from '../utils/mutations'
 
 import Auth from '../utils/auth';
 
-const MessageForm = () => {
+const MessageForm = ({ handleMessagePost }) => {
   const [messageText, setMessageText] = useState('');
 
   const [characterCount, setCharacterCount] = useState(0);
@@ -22,9 +22,9 @@ const MessageForm = () => {
           message: messageText
         },
       });
-
       setMessageText('');
-      window.location.reload(false);
+      handleMessagePost()
+      // window.location.reload(false);
     } catch (err) {
       console.error(err);
     }
