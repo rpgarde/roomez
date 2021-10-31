@@ -1,9 +1,10 @@
 import React from 'react';
 import { useQuery } from '@apollo/client'
 
-import { QUERY_CHORE } from '../utils/queries'
+import { QUERY_CHORE, QUERY_USER } from '../utils/queries'
 
 import ChoreCard from '../components/ChoreCard'
+import ChoreForm from '../components/ChoreForm'
 
 export default function Chore() {
     const { loading, data } = useQuery(QUERY_CHORE)
@@ -13,6 +14,7 @@ export default function Chore() {
     return (
         <div>
             <h1 className="my-5">Chores</h1>
+            <ChoreForm />
             <div>
                 {chores.map((chore) => (
                     <ChoreCard

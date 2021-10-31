@@ -16,9 +16,16 @@ const resolvers = {
       const params = _id ? { _id } : {};
       return await House.find(params).populate("occupants");
     },
-    user: async (_, { _id }) => {
+    user: async (_, { _id }, context) => {
+      console.log('querying user')
       const params = _id ? { _id } : {};
-      return await User.find(params).populate("house")
+            if (context.user) {
+              const houseId = context.user.house._id
+            const userData = await User.find({house: houseId}).populate("house")
+            console.log(userData)
+            return userData
+    }
+    throw new AuthenticationError('You need to be logged in to see this')
     },
     bill: async (_, { _id }, context) => {
       const params = _id ? { _id } : {};
@@ -157,6 +164,26 @@ const resolvers = {
         let messageData = await Message.findById(messageId)
         console.log(messageData)
         return Message.findOneAndUpdate({_id: messageId}, { house: houseData, createdBy: userData }, {new:true} )
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
+    addChore: async (parent,args,context) =>{
+      console.log('adding a chore!')
+      if (context.user) {
+        // console.log(context.user)
+        // const message = await Message.create(args)
+        // console.log(message)
+        // const messageId = message._id
+        // console.log('message ID: '+messageId)
+        // let userData = await User.findOne({'_id':context.user._id})
+        // console.log('context user id: '+context.user._id)
+        // console.log(userData)
+        // let houseData = await House.findOne({'_id':context.user.house._id})
+        // console.log(houseData)
+        // let messageData = await Message.findById(messageId)
+        // console.log(messageData)
+        // return Message.findOneAndUpdate({_id: messageId}, { house: houseData, createdBy: userData }, {new:true} )
       }
       throw new AuthenticationError('You need to be logged in!');
     }

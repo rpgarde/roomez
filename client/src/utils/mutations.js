@@ -64,3 +64,20 @@ export const ADD_MESSAGE = gql`
     }
   }
 `;
+
+
+export const ADD_CHORE = gql`
+  mutation addChore(      
+      $name: String!
+      $dueAt: String
+      $photo: String 
+) {
+    addMessage(name: $name, dueAt: $dueAt) {
+      _id
+      createdAt
+      name
+      createdBy {firstName}
+      photo
+    }
+  }
+`;
