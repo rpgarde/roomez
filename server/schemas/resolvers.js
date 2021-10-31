@@ -24,11 +24,11 @@ const resolvers = {
       const params = _id ? { _id } : {};
       if (context.user) {
         const houseId = context.user.house._id
-        return await Bill.find(params)
+        const billData = await Bill.find({house: houseId})
           .populate('createdBy')
           .populate('assignedTo')
           .populate('house')
-          .where('._id').in('house').equals(houseId)
+        return(billData)
       }
       throw new AuthenticationError('You need to be logged in to see this')
     },
@@ -36,11 +36,11 @@ const resolvers = {
       const params = _id ? { _id } : {};
       if (context.user) {
         const houseId = context.user.house._id
-        return await Chore.find(params)
+        console.log(houseId)
+        return await Chore.find({house: houseId})
           .populate('createdBy')
           .populate('assignedTo')
           .populate('house')
-          .where('._id').in('house').equals(houseId)
       }
       throw new AuthenticationError('You need to be logged in to see this')
     },
@@ -49,10 +49,10 @@ const resolvers = {
       console.log(context.user)
       if (context.user) {
         const houseId = context.user.house._id
-        return await Message.find(params)
+        return await Message.find({house: houseId})
           .populate('createdBy')
           .populate('house')
-          .where('._id').in('house').equals(houseId)
+          .sort({createdAt: -1})
       }
       throw new AuthenticationError('You need to be logged in to see this')
     },
@@ -139,10 +139,10 @@ const resolvers = {
         console.log(message)
         const messageId = message._id
         console.log('message ID: '+messageId)
-        let userData = await User.findOne({id:context.user._id}).exec()
+        let userData = await User.findOne({'_id':context.user._id})
         console.log('context user id: '+context.user._id)
         console.log(userData)
-        let houseData = await House.findOne({id:context.user.house._id}).exec()
+        let houseData = await House.findOne({'_id':context.user.house._id})
         console.log(houseData)
         let messageData = await Message.findById(messageId)
         console.log(messageData)
