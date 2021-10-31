@@ -82,19 +82,29 @@ const resolvers = {
         address: address,
         code: code
       }
-      console.log(houseData)
-      let user = await User.create(args);
-      const newHouse = await House.create(houseData);
-      await User.findOneAndUpdate({ email }, { $push: { house: newHouse } })
-      await House.findOneAndUpdate({ address }, { $push: { occupants: user } })
-      user = await User.findOne({ email }).populate("house");
 
-      // TODO: Add a condition where if the address is null, look for a current house. 
-
-      const token = signToken(user);
-      console.log(token)
-      return { token, user };
-
+      if(!houseData.address){
+        let lookupHouse = await House.findOne({code:houseData.code})
+        if(!lookupHouse){
+          throw new AuthenticationError('No house found with this code')
+        }
+        let user = await User.create(args);
+        await User.findOneAndUpdate({ email }, { $push: { house: lookupHouse } })
+        user = await User.findOne({ email }).populate("house");
+        const token = signToken(user);
+        return { token, user };
+      }
+      else{
+        console.log(houseData)
+        let user = await User.create(args);
+        const newHouse = await House.create(houseData);
+        await User.findOneAndUpdate({ email }, { $push: { house: newHouse } })
+        await House.findOneAndUpdate({ address }, { $push: { occupants: user } })
+        user = await User.findOne({ email }).populate("house");
+        const token = signToken(user);
+        console.log(token)
+        return { token, user };
+      }
     },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email }).populate("house");

@@ -24,7 +24,6 @@ const MessageForm = ({ handleMessagePost }) => {
       });
       setMessageText('');
       handleMessagePost()
-      // window.location.reload(false);
     } catch (err) {
       console.error(err);
     }
@@ -56,10 +55,10 @@ const MessageForm = ({ handleMessagePost }) => {
             className="flex-row justify-center justify-space-between-md align-center"
             onSubmit={handleFormSubmit}
           >
-            <div className="col-12 col-lg-9">
+            <div className="col-12">
               <textarea
                 name="messageText"
-                placeholder="Here's a new message..."
+                placeholder="Add a new message here"
                 value={messageText}
                 className="form-input w-100"
                 style={{ lineHeight: '1.5', resize: 'vertical' }}
