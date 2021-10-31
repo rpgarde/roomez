@@ -19,8 +19,7 @@ const ChoreSchema = new Schema({
     },
     createdBy:{
         type:Schema.Types.ObjectId,
-        ref:"User",
-        required:true
+        ref:"User"
     },
     assignedTo:{
         type:Schema.Types.ObjectId,
@@ -28,7 +27,7 @@ const ChoreSchema = new Schema({
     },
     complete:{
         type:Boolean,
-        required:true
+        default: false
     },
     completedAt:{
         type: Date

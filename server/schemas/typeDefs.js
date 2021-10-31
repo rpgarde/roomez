@@ -104,6 +104,7 @@ const typeDefs = gql`
     addChore(
       name: String!
       dueAt: String
+      assignedTo: String
       photo: String 
     ): Chore
   }

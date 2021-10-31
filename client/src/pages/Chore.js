@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useQuery } from '@apollo/client'
 
 import { QUERY_CHORE, QUERY_USER } from '../utils/queries'
@@ -7,14 +7,22 @@ import ChoreCard from '../components/ChoreCard'
 import ChoreForm from '../components/ChoreForm'
 
 export default function Chore() {
-    const { loading, data } = useQuery(QUERY_CHORE)
+    const { loading, data , refetch } = useQuery(QUERY_CHORE)
     const chores = data?.chore || []
+    const [postSuccess, setPostSuccess] = useState(false)
 
+    const handleChorePost = () => {
+        setPostSuccess(true)
+        refetch()
+        setTimeout(() => setPostSuccess(false), 3000)
+      }
+      
     console.log(chores)
     return (
-        <div>
-            <h1 className="my-5">Chores</h1>
-            <ChoreForm />
+        <div className = "container-fluid">
+        <h1 className = "text-center my-3 fw-bold">Chores</h1>
+            <ChoreForm handleChorePost = {handleChorePost}/>
+            {postSuccess && <div className = "alert alert-success">Post successful!</div>}
             <div>
                 {chores.map((chore) => (
                     <ChoreCard

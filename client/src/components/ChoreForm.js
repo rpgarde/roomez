@@ -3,18 +3,27 @@ import { Link } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/client';
 import { QUERY_USER } from '../utils/queries'
 import { ADD_CHORE } from '../utils/mutations'
+import DayPickerInput from "react-day-picker/DayPickerInput";
+import "react-day-picker/lib/style.css";
+
 
 import Auth from '../utils/auth';
 
-const ChoreForm = ({ handleMessagePost }) => {
+const ChoreForm = ({ handleChorePost }) => {
   const [choreText, setChoreText] = useState('');
-  const [assignedTo,setAssignedTo] = useState('');
-  
+  const [assignedTo, setAssignedTo] = useState('');
+  const [date, setDate] = useState(new Date());
+
+  function onDateChange(date) {
+    setDate(date);
+  }
+
+
   const [characterCount, setCharacterCount] = useState(0);
 
-  const [addChore, { error , data }] = useMutation(ADD_CHORE)
+  const [addChore, { error, data }] = useMutation(ADD_CHORE)
 
-  const { loading, error:queryError, data:queryData } = useQuery(QUERY_USER)
+  const { loading, error: queryError, data: queryData } = useQuery(QUERY_USER)
   const users = queryData?.user || []
 
   const handleFormSubmit = async (event) => {
@@ -23,15 +32,17 @@ const ChoreForm = ({ handleMessagePost }) => {
     try {
       console.log(choreText)
       console.log(assignedTo)
-    //   const { data } = await addChore({
-    //     variables: {
-    //       name: choreText,
-    //       assignedTo: assignedTo
-    //     },
-    //   });
+      console.log(date)
+        const { data } = await addChore({
+          variables: {
+            name: choreText,
+            assignedTo: assignedTo,
+            dueAt: date
+          },
+        });
       setChoreText('');
       setAssignedTo('')
-      // handleMessagePost()
+      handleChorePost()
     } catch (err) {
       console.error(err);
     }
@@ -43,49 +54,62 @@ const ChoreForm = ({ handleMessagePost }) => {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    if (name === 'messageText' && value.length <= 280) {
+    if (name === 'choreText' && value.length <= 280) {
       setChoreText(value);
       setCharacterCount(value.length);
     }
   };
 
   return (
-    <div className = "m-3">
-      <h3>Add a new chore</h3>
+    <div className="m-3">
+      <h3 className = "mb-3 text-center">Add a new chore</h3>
 
       {Auth.loggedIn() ? (
-        <>
-          <p
-            className={`m-0 ${
-              characterCount === 120 || error ? 'text-danger' : ''
-            }`}
-          >
-            Character Count: {characterCount}/120
-          </p>
+        <div className = "col-6 offset-3">
           <form
             className="flex-row justify-center justify-space-between-md align-center"
             onSubmit={handleFormSubmit}
           >
-            <select className="form-select form-select-sm" name = "assignedTo" onChange = {handleAssignedTo}>
-            <option selected value = ''>Select who to assign to</option>
-            {users.map((user)=>(
-              <option value = {user._id}>{user.firstName}</option>
-            ))
-            }
-          </select>
-
-            <div className="col-12">
+            <div className="mb-3">
+                <label className="form-label" htmlFor="assignedTo">Assign To</label>
+                <select
+                  id="assignedTo"
+                  className="form-select form-select-sm"
+                  name="assignedTo"
+                  onChange={handleAssignedTo}>
+                  <option selected value=''>Select</option>
+                  {users.map((user) => (
+                    <option value={user._id}>{user.firstName}</option>
+                  ))
+                  }
+                </select>
+                </div>
+              <div className="mb-3">
+                <label className="form-label" htmlFor="dueDate">Due Date</label>
+                <div>
+                <DayPickerInput className="form-control" id="dueDate" onDayChange={onDateChange} />
+                </div>
+            </div>
+            <div className="mb-3">
+              <label className="form-label" htmlFor="dueDate">Chore description</label>
               <input
-                name="messageText"
-                placeholder="Add a new message here"
+                id="choreText"
+                name="choreText"
+                placeholder="What chore is this?"
                 value={choreText}
-                className="form-input w-100"
+                className="form-control w-100"
                 style={{ lineHeight: '1.5', resize: 'vertical' }}
                 onChange={handleChange}
               ></input>
+              <span
+                className={`form-text ${characterCount === 120 || error ? 'text-danger' : ''
+                  }`}
+              >
+                Character Count: {characterCount}/120
+              </span>
             </div>
 
-            <div className="col-12 col-lg-3">
+            <div className="text-center">
               <button className="btn btn-primary" type="submit">
                 Add Chore
               </button>
@@ -97,7 +121,7 @@ const ChoreForm = ({ handleMessagePost }) => {
               </div>
             )}
           </form>
-        </>
+        </div>
       ) : (
         <p>
           You need to be logged in to leave messages. Please{' '}

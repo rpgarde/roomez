@@ -71,12 +71,14 @@ export const ADD_CHORE = gql`
       $name: String!
       $dueAt: String
       $photo: String 
+      $assignedTo: String
 ) {
-    addMessage(name: $name, dueAt: $dueAt) {
+    addChore(name: $name, dueAt: $dueAt, photo: $photo, assignedTo: $assignedTo) {
       _id
       createdAt
       name
       createdBy {firstName}
+      dueAt
       photo
     }
   }

@@ -168,22 +168,32 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
-    addChore: async (parent,args,context) =>{
+    addChore: async (parent, { name, assignedTo, dueAt },context) =>{
       console.log('adding a chore!')
       if (context.user) {
-        // console.log(context.user)
-        // const message = await Message.create(args)
-        // console.log(message)
-        // const messageId = message._id
+        let assignedToUser = await User.findOne({'_id':assignedTo})
+        console.log(assignedToUser)
+        console.log(context.user)
+        const newChore = {
+          name:name,
+          dueAt: dueAt
+        }
+        const chore = await Chore.create(newChore)
+        console.log(chore)
+        const choreId = chore._id
         // console.log('message ID: '+messageId)
-        // let userData = await User.findOne({'_id':context.user._id})
+        let userData = await User.findOne({'_id':context.user._id})
         // console.log('context user id: '+context.user._id)
         // console.log(userData)
-        // let houseData = await House.findOne({'_id':context.user.house._id})
+        let houseData = await House.findOne({'_id':context.user.house._id})
         // console.log(houseData)
-        // let messageData = await Message.findById(messageId)
-        // console.log(messageData)
-        // return Message.findOneAndUpdate({_id: messageId}, { house: houseData, createdBy: userData }, {new:true} )
+        // let choreData = await ChorefindById(choreId)
+        // console.log(choreData)
+        return Chore.findOneAndUpdate({_id: choreId}, { 
+          house: houseData, 
+          createdBy: userData, 
+          assignedTo: assignedToUser
+        }, {new:true} )
       }
       throw new AuthenticationError('You need to be logged in!');
     }
