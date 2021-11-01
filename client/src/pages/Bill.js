@@ -7,6 +7,7 @@ import { QUERY_BILL } from '../utils/queries';
 
 export default function Bill() {
 const { loading, data, refetch } = useQuery(QUERY_BILL)
+console.log(data)
 const bills = data?.bill || []
 const [postSuccess, setPostSuccess] = useState(false)
 
@@ -16,11 +17,16 @@ const handleBillPost = () => {
     setTimeout(() => setPostSuccess(false), 3000)
   }
 
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
 console.log(bills)
     return (
         <div>
         <h1 className = "text-center mb-3 fw-bold">Bills</h1>
-        <BillForm handleChorePost = {handleBillPost}/>
+        <BillForm handleBillPost = {handleBillPost}/>
             {postSuccess && <div className = "alert alert-success">Post successful!</div>}
 
         <div className>
@@ -37,6 +43,7 @@ console.log(bills)
         amount = {bill.amount}
         paidAt = {bill.paidAt}
         paid = {bill.paid}
+        key={bill.id}
         />
         ))}
         </div>
