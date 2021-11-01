@@ -82,6 +82,9 @@ function App() {
             <Route exact path="/file">
               <UploadForm />
             </Route>
+            <Route exact path="/hello">
+              <Landing />
+            </Route>
           </main>
           <Footer />
         </div>

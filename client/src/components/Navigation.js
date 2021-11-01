@@ -13,7 +13,6 @@ function Navigation({ currentPage, handlePageChange }) {
     <nav className="navbar sticky-top navbar-expand-md navbar-dark">
       <div className="container-fluid">
         <a className="navbar-brand fw-bold" href="/"
-        //  onClick={() => handlePageChange('Landing')}
         >
           <img src={lightLogo} alt="roomEZ" width="100" />
         </a>
@@ -53,17 +52,6 @@ function Navigation({ currentPage, handlePageChange }) {
             </li>
             <li className="nav-item">
               {Auth.loggedIn() ? (
-                  <a className="nav-link" href = "/" onClick={logout}>
-                    Logout
-                  </a>
-              ) : (
-                  <a className="nav-link" href="/signup">
-                    Signup
-                  </a>
-              )}
-            </li>
-            <li className="nav-item">
-              {Auth.loggedIn() ? (
                   <a href="/me"
                   className={window.location.pathname === '/me' ? 'nav-link active' : 'nav-link'}
                   >
@@ -72,6 +60,17 @@ function Navigation({ currentPage, handlePageChange }) {
               ) : (
                   <a className="nav-link" href="/login">
                     Login
+                  </a>
+              )}
+            </li>
+            <li className="nav-item">
+              {Auth.loggedIn() ? (
+                  <a className="nav-link" href = "/" onClick={logout}>
+                    Logout
+                  </a>
+              ) : (
+                  <a className="nav-link" href="/signup">
+                    Signup
                   </a>
               )}
             </li>
