@@ -100,6 +100,7 @@ const resolvers = {
         }
         let user = await User.create(args);
         await User.findOneAndUpdate({ email }, { $push: { house: lookupHouse } })
+        await House.findOneAndUpdate({code:houseData.code}, { $push: { occupants: user } })
         user = await User.findOne({ email }).populate("house");
         const token = signToken(user);
         return { token, user };
