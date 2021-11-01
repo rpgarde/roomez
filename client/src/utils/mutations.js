@@ -1,6 +1,5 @@
 import { gql } from '@apollo/client';
 
-
 export const LOGIN_USER = gql`
   mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
@@ -49,7 +48,6 @@ export const ADD_USER_AND_HOUSE = gql`
   }
 `;
 
-
 export const ADD_MESSAGE = gql`
   mutation addMessage(      
       $message: String!
@@ -65,7 +63,6 @@ export const ADD_MESSAGE = gql`
   }
 `;
 
-
 export const ADD_CHORE = gql`
   mutation addChore(      
       $name: String!
@@ -78,6 +75,26 @@ export const ADD_CHORE = gql`
       createdAt
       name
       createdBy {firstName}
+      dueAt
+      photo
+    }
+  }
+`;
+
+export const ADD_BILL = gql`
+  mutation addBill(      
+      $name: String!
+      $dueAt: String
+      $photo: String 
+      $assignedTo: String
+      $amount: Float!
+) {
+    addBill(name: $name, dueAt: $dueAt, photo: $photo, assignedTo: $assignedTo, amount: $amount) {
+      _id
+      createdAt
+      name
+      createdBy {firstName}
+      amount
       dueAt
       photo
     }

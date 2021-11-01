@@ -19,8 +19,7 @@ const BillSchema = new Schema({
     },
     createdBy:{
         type:Schema.Types.ObjectId,
-        ref:"User",
-        required:true
+        ref:"User"
     },
     assignedTo:{
         type:Schema.Types.ObjectId,
@@ -32,7 +31,7 @@ const BillSchema = new Schema({
     },
     paid:{
         type:Boolean,
-        required:true
+        default:false
     },
     paidAt:{
         type: Date

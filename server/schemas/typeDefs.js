@@ -33,8 +33,8 @@ const typeDefs = gql`
     house: House
     createdBy: User
     assignedTo: User
-    amount: Int!
-    paid: Boolean
+    amount: Float!
+    paid: Boolean!
     paidAt: String
     photo: String
   }
@@ -97,9 +97,10 @@ const typeDefs = gql`
       ): Message 
     addBill(
       name: String!
-      amount: Int!
-      photo: String
       dueAt: String
+      photo: String
+      amount: Float!
+      assignedTo: String
       ): Bill
     addChore(
       name: String!

@@ -196,6 +196,38 @@ const resolvers = {
         }, {new:true} )
       }
       throw new AuthenticationError('You need to be logged in!');
+    },
+
+    addBill: async (parent, args, context) =>{
+      console.log('adding a bill!')
+      console.log(args)
+      // if (context.user) {
+      //   let assignedToUser = await User.findOne({'_id':assignedTo})
+      //   console.log(assignedToUser)
+      //   console.log(context.user)
+      //   const newBill = {
+      //     name:name,
+      //     dueAt: dueAt,
+      //     amount: amount
+      //   }
+      //   const bill = await Bill.create(newBill)
+      //   console.log(bill)
+      //   const billId = bill._id
+      //   // console.log('message ID: '+messageId)
+      //   let userData = await User.findOne({'_id':context.user._id})
+      //   // console.log('context user id: '+context.user._id)
+      //   // console.log(userData)
+      //   let houseData = await House.findOne({'_id':context.user.house._id})
+      //   // console.log(houseData)
+      //   // let choreData = await ChorefindById(choreId)
+      //   // console.log(choreData)
+      //   return Bill.findOneAndUpdate({_id: billId}, { 
+      //     house: houseData, 
+      //     createdBy: userData, 
+      //     assignedTo: assignedToUser
+      //   }, {new:true} )
+      // }
+      // throw new AuthenticationError('You need to be logged in!');
     }
   },
 };
