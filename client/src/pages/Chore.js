@@ -14,7 +14,7 @@ export default function Chore() {
     const completedChores = chores.filter(chore=>chore.complete)
     const incompleteChores = chores.filter(chore=>!chore.complete&&chore.dueAt>=new Date())
     const overdueChores = chores.filter(chore=>!chore.complete&&chore.dueAt<new Date())
-    console.log(overdueChores)
+
     const handleChorePost = () => {
         setPostSuccess(true)
         refetch()
@@ -26,7 +26,8 @@ export default function Chore() {
         <h1 className = "text-center my-3 fw-bold">Chores</h1>
         <ChoreForm handleChorePost = {handleChorePost}/>
             {postSuccess && <div className = "alert alert-success">Post successful!</div>}
-            <div className = "row">
+            {loading?<h1>Now loading...</h1>
+            :(<div className = "row">
             <div className = "col-md-4 custom-bg-light-blue">
                     <h4 className = "fw-bold text-center mt-3">To-do ({incompleteChores.length})</h4>
                 {incompleteChores&&incompleteChores.map((chore) => (
@@ -80,7 +81,7 @@ export default function Chore() {
                     />
                 ))}
                 </div>
-            </div>
+            </div>)}
         </div>
     );
 }
