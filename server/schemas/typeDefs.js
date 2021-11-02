@@ -108,6 +108,14 @@ const typeDefs = gql`
       assignedTo: String
       photo: String 
     ): Chore
+    editChore(
+      _id: ID!
+      name: String
+      dueAt: String
+      assignedTo: String
+      complete: Boolean
+      photo: String 
+    ): Chore
   }
 `
 

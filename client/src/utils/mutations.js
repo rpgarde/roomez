@@ -100,3 +100,24 @@ export const ADD_BILL = gql`
     }
   }
 `;
+
+export const EDIT_CHORE = gql`
+  mutation editChore( 
+      $_id:ID!     
+      $name: String
+      $dueAt: String
+      $photo: String 
+      $assignedTo: String
+      $complete: Boolean
+) {
+    editChore(_id: $_id, name: $name, dueAt: $dueAt, photo: $photo, assignedTo: $assignedTo, complete:$complete) {
+      _id
+      createdAt
+      name
+      createdBy {firstName}
+      dueAt
+      complete
+      photo
+    }
+  }
+`;

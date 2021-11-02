@@ -231,8 +231,50 @@ const resolvers = {
         }, {new:true} )
       }
       throw new AuthenticationError('You need to be logged in!');
-    }
+    },
+
+    editChore: async (parent, { _id, complete }, context) =>{
+      console.log('editing a chore!')
+      if (context.user) {
+        
+        if(!complete){
+        var completedAt = new Date()
+        }
+        // let assignedToUser = await User.findOne({'_id':assignedTo})
+        // console.log(assignedToUser)
+        // console.log(context.user)
+        // const editChore = {
+        //   name:name,
+        //   assignedTo,
+        //   dueAt,
+        //   complete
+        // }
+        // const chore = await Chore.create(newChore)
+        // console.log(chore)
+        // const choreId = chore._id
+        // // console.log('message ID: '+messageId)
+        // let userData = await User.findOne({'_id':context.user._id})
+        // // console.log('context user id: '+context.user._id)
+        // // console.log(userData)
+        // let houseData = await House.findOne({'_id':context.user.house._id})
+        // // console.log(houseData)
+        let choreData = await Chore.findOneAndUpdate({'_id':_id},{
+          completedAt:completedAt?completedAt:null,
+          complete:!complete
+        }, {new:true} )
+        console.log(choreData)
+        return choreData
+        // // console.log(choreData)
+        // return Chore.findOneAndUpdate({_id: choreId}, { 
+        //   house: houseData, 
+        //   createdBy: userData, 
+        //   assignedTo: assignedToUser
+        // }, {new:true} )
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
   },
+  
 };
 
 module.exports = resolvers;

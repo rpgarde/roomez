@@ -24,7 +24,7 @@ export default function Chore() {
             <ChoreForm handleChorePost = {handleChorePost}/>
             {postSuccess && <div className = "alert alert-success">Post successful!</div>}
             <div>
-                {chores.map((chore) => (
+                {chores&&chores.map((chore) => (
                     <ChoreCard
                         createdAt={chore.createdAt}
                         name={chore.name}
@@ -35,6 +35,7 @@ export default function Chore() {
                         complete={chore.complete}
                         completedAt={chore.completedAt}
                         photo={chore.photo}
+                        _id={chore._id}
                     />
                 ))}
             </div>
