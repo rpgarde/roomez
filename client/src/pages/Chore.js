@@ -11,20 +11,25 @@ export default function Chore() {
     const chores = data?.chore || []
     const [postSuccess, setPostSuccess] = useState(false)
 
+    const completedChores = chores.filter(chore=>chore.complete)
+    const incompleteChores = chores.filter(chore=>!chore.complete&&chore.dueAt>=new Date())
+    const overdueChores = chores.filter(chore=>!chore.complete&&chore.dueAt<new Date())
+    console.log(overdueChores)
     const handleChorePost = () => {
         setPostSuccess(true)
         refetch()
         setTimeout(() => setPostSuccess(false), 3000)
       }
-      
-    console.log(chores)
+    
     return (
         <div className = "container-fluid">
         <h1 className = "text-center my-3 fw-bold">Chores</h1>
-            <ChoreForm handleChorePost = {handleChorePost}/>
+        <ChoreForm handleChorePost = {handleChorePost}/>
             {postSuccess && <div className = "alert alert-success">Post successful!</div>}
-            <div>
-                {chores&&chores.map((chore) => (
+            <div className = "row">
+            <div className = "col-md-4 custom-bg-light-blue">
+                    <h4 className = "fw-bold text-center mt-3">To-do ({incompleteChores.length})</h4>
+                {incompleteChores&&incompleteChores.map((chore) => (
                     <ChoreCard
                         createdAt={chore.createdAt}
                         name={chore.name}
@@ -38,6 +43,43 @@ export default function Chore() {
                         _id={chore._id}
                     />
                 ))}
+                </div>
+                <div className = "col-md-4 custom-bg-light-blue">
+                    <h4 className = "fw-bold text-center mt-3">Overdue ({overdueChores.length})</h4>
+                {overdueChores&&overdueChores.map((chore) => (
+                    <ChoreCard
+                        createdAt={chore.createdAt}
+                        name={chore.name}
+                        dueAt={chore.dueAt}
+                        house={chore.house.address}
+                        createdBy={chore.createdBy.firstName}
+                        assignedTo={chore.assignedTo.firstName}
+                        complete={chore.complete}
+                        completedAt={chore.completedAt}
+                        photo={chore.photo}
+                        _id={chore._id}
+                        isOverdue={true}
+                    />
+                ))}
+                </div>
+
+                <div className = "col-md-4 custom-bg-light-blue">
+                    <h4 className = "fw-bold text-center mt-3">Done ({completedChores.length})</h4>
+                {completedChores&&completedChores.map((chore) => (
+                    <ChoreCard
+                        createdAt={chore.createdAt}
+                        name={chore.name}
+                        dueAt={chore.dueAt}
+                        house={chore.house.address}
+                        createdBy={chore.createdBy.firstName}
+                        assignedTo={chore.assignedTo.firstName}
+                        complete={chore.complete}
+                        completedAt={chore.completedAt}
+                        photo={chore.photo}
+                        _id={chore._id}
+                    />
+                ))}
+                </div>
             </div>
         </div>
     );

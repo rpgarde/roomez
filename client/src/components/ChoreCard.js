@@ -6,29 +6,22 @@ import { EDIT_CHORE } from '../utils/mutations';
 function ChoreCard(props) {
     let imgString = '/images/'+props.photo
 
-    const [completeStatus,setCompleteStatus] = useState()
+    const [completeStatus,setCompleteStatus] = useState(props.complete)
 
-    const [editChore,{error,data}] = useMutation(EDIT_CHORE)
-
-    useEffect(()=>{
-        console.log('use effect '+completeStatus)
-    },[completeStatus])
-
+    const [editChore,{ error, data }] = useMutation(EDIT_CHORE)
 
     const handleClick = async (event) => {
         event.preventDefault()
         try{
         console.log('id: '+props._id)
-        // console.log('before:'+completeStatus)
-        // console.log('during'+!completeStatus)
-        setCompleteStatus(!props.completed)
+        // setCompleteStatus(!completeStatus)
         console.log('after:'+completeStatus)
-        // const {data} = await editChore({
-        //     variables:{
-        //         _id:props._id,
-        //         complete:completeStatus
-        //     }
-        // })
+        const {data} = await editChore({
+            variables:{
+                _id:props._id,
+                complete:completeStatus
+            }
+        })
         console.log(data)
          }
          catch(err){
@@ -40,17 +33,16 @@ function ChoreCard(props) {
     return (
         <div className="card m-3">
             <div className="card-body">
-                <h5 className="card-title fw-bold">{props.name} - due on <Moment format = "ddd, Do MMM YYYY" parse = "x">{props.dueAt}</Moment></h5>
-                {completeStatus?(
-                <button className = "btn btn-secondary" onClick = {handleClick}>Mark Incomplete</button>
-                ):(
-                <button className = "btn btn-primary" onClick = {handleClick}>Mark Complete</button>
-                )}
-                <p className="card-text">Created By: {props.createdBy}</p>
+                <h5 className="card-title fw-bold">{props.name}</h5>
+                <span className={props.isOverdue?"badge bg-danger mb-3":"badge bg-warning text-dark mb-3"}>Due: <Moment format = "ddd, D MMM" parse = "x">{props.dueAt}</Moment></span> 
+                {props.completedAt&&<span className="badge bg-success mx-2 mb-3">Completed: <Moment format = "ddd, D MMM" parse = "x">{props.completedAt}</Moment></span>}
                 <p className="card-text">Assigned to: {props.assignedTo}</p>
-                <p className="card-text">Complete: {props.completed ? `Yes` : `No`}</p>
-                {props.completed&&(<p className = "card-text">Completed On: {props.completedAt}</p>)}
-                {props.photo ? (<img src = {imgString}/>) : null}
+                <div>{props.photo ? (<img src = {imgString}/>) : null}</div>
+                {completeStatus?(
+                <button type = "button" className = "btn btn-secondary" onClick = {handleClick}>Mark Incomplete</button>
+                ):(
+                <button type = "button" className = "btn btn-primary" onClick = {handleClick}>Mark Complete</button>
+                )}
             </div>
         </div>
     )

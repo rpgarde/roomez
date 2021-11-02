@@ -188,7 +188,7 @@ const resolvers = {
         // console.log('message ID: '+messageId)
         let userData = await User.findOne({'_id':context.user._id})
         // console.log('context user id: '+context.user._id)
-        // console.log(userData)
+        console.log(userData)
         let houseData = await House.findOne({'_id':context.user.house._id})
         // console.log(houseData)
         // let choreData = await ChorefindById(choreId)
