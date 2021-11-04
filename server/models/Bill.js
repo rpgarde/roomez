@@ -38,6 +38,10 @@ const BillSchema = new Schema({
     },
     photo:{
         type: String
+    },
+    isArchived:{
+        type:Boolean,
+        default:false
     }
 });
 

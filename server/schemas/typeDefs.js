@@ -37,6 +37,7 @@ const typeDefs = gql`
     paid: Boolean!
     paidAt: String
     photo: String
+    isArchived:Boolean
   }
 
   type Chore{
@@ -116,6 +117,15 @@ const typeDefs = gql`
       complete: Boolean
       photo: String 
     ): Chore
+    editBill(
+      _id:ID!
+      name:String
+      dueAt:String
+      assignedTo:String
+      paid:Boolean
+      photo:String
+      isArchived:Boolean
+    ): Bill
   }
 `
 

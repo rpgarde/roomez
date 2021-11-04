@@ -121,3 +121,34 @@ export const EDIT_CHORE = gql`
     }
   }
 `;
+
+export const EDIT_BILL = gql`
+  mutation editBill( 
+      $_id:ID!     
+      $name: String
+      $dueAt: String
+      $photo: String 
+      $assignedTo: String
+      $paid: Boolean
+      $isArchived: Boolean
+) {
+    editBill(_id: $_id, 
+    name: $name, 
+    dueAt: $dueAt, 
+    photo: $photo, 
+    assignedTo: $assignedTo, 
+    paid:$paid,
+    isArchived: $isArchived
+    ) {
+      _id
+      createdAt
+      name
+      createdBy {firstName}
+      dueAt
+      paid
+      photo
+      isArchived
+    }
+  }
+`;
+

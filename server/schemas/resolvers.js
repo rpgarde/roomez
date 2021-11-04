@@ -34,7 +34,7 @@ const resolvers = {
       const params = _id ? { _id } : {};
       if (context.user) {
         const houseId = context.user.house._id
-        const billData = await Bill.find({house: houseId})
+        const billData = await Bill.find({house: houseId,isArchived:{$ne:true}})
           .populate('createdBy')
           .populate('assignedTo')
           .populate('house')
@@ -264,6 +264,55 @@ const resolvers = {
         }, {new:true} )
         console.log(choreData)
         return choreData
+        // // console.log(choreData)
+        // return Chore.findOneAndUpdate({_id: choreId}, { 
+        //   house: houseData, 
+        //   createdBy: userData, 
+        //   assignedTo: assignedToUser
+        // }, {new:true} )
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
+    editBill: async (parent, { _id, paid, isArchived }, context) =>{
+      console.log('editing a bill!')
+      if (context.user) {
+        
+        if(isArchived){
+          let billData = await Bill.findOneAndUpdate({'_id':_id},{
+            isArchived:true
+          }, {new:true} )
+          console.log(billData)
+          return billData  
+        }
+
+        if(!paid){
+        var paidAt = new Date()
+        }
+        // let assignedToUser = await User.findOne({'_id':assignedTo})
+        // console.log(assignedToUser)
+        // console.log(context.user)
+        // const editChore = {
+        //   name:name,
+        //   assignedTo,
+        //   dueAt,
+        //   complete
+        // }
+        // const chore = await Chore.create(newChore)
+        // console.log(chore)
+        // const choreId = chore._id
+        // // console.log('message ID: '+messageId)
+        // let userData = await User.findOne({'_id':context.user._id})
+        // // console.log('context user id: '+context.user._id)
+        // // console.log(userData)
+        // let houseData = await House.findOne({'_id':context.user.house._id})
+        // // console.log(houseData)
+        let billData = await Bill.findOneAndUpdate({'_id':_id},{
+          paidAt:paidAt?paidAt:null,
+          paid:!paid
+        }, {new:true} )
+        console.log(billData)
+        return billData
         // // console.log(choreData)
         // return Chore.findOneAndUpdate({_id: choreId}, { 
         //   house: houseData, 

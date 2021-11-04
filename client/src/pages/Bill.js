@@ -21,11 +21,6 @@ const handleBillPost = () => {
     setTimeout(() => setPostSuccess(false), 3000)
   }
 
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
 console.log(bills)
     return (
       <div className = "container-fluid">
@@ -46,11 +41,13 @@ console.log(bills)
                   assignedTo = {bill.assignedTo.firstName}
                   createdBy = {bill.createdBy.firstName}
                   photo = {bill.photo}
-                  _id = {bill.id}
+                  _id = {bill._id}
                   amount = {bill.amount}
                   paidAt = {bill.paidAt}
                   paid = {bill.paid}
-                  key={bill.id}
+                  key={bill._id}
+                  isArchived = {bill.isArchived}
+                  refetch={refetch}
                   />
                 ))}
                 </div>
@@ -65,12 +62,14 @@ console.log(bills)
                   assignedTo = {bill.assignedTo.firstName}
                   createdBy = {bill.createdBy.firstName}
                   photo = {bill.photo}
-                  _id = {bill.id}
+                  _id = {bill._id}
                   amount = {bill.amount}
                   paidAt = {bill.paidAt}
                   paid = {bill.paid}
-                  key={bill.id}
+                  key={bill._id}
                   isOverdue={true}
+                  isArchived = {bill.isArchived}
+                  refetch={refetch}
                   />
                 ))}
                 </div>
@@ -86,11 +85,13 @@ console.log(bills)
                   assignedTo = {bill.assignedTo.firstName}
                   createdBy = {bill.createdBy.firstName}
                   photo = {bill.photo}
-                  _id = {bill.id}
+                  _id = {bill._id}
                   amount = {bill.amount}
                   paidAt = {bill.paidAt}
                   paid = {bill.paid}
-                  key={bill.id}
+                  key={bill._id}
+                  isArchived = {bill.isArchived}
+                  refetch={refetch}
                   />
                 ))}
                 </div>
