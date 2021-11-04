@@ -35,6 +35,22 @@ h1 {
     background-color:#A2C4E0
 }
 
+.custom-bg-yellow{
+    background-color:#F7CB2D
+}
+
+.custom-bg-darkblue{
+background-color: #3E72A6
+}
+
+.custom-bg-darkestblue{
+    background-color:#23547B
+}
+
 .custom-text-yellow{
     color:#F7CB2D
+}
+
+.font-smallest{
+    font-size:0.75em;
 }

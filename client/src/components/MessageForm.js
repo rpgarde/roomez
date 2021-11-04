@@ -60,13 +60,13 @@ const MessageForm = ({ handleMessagePost }) => {
                 name="messageText"
                 placeholder="Add a new message here"
                 value={messageText}
-                className="form-input w-100"
-                style={{ lineHeight: '1.5', resize: 'vertical' }}
+                className="form-control"
+                rows = "3"
                 onChange={handleChange}
               ></textarea>
             </div>
 
-            <div className="col-12 col-lg-3">
+            <div className="text-center">
               <button className="btn btn-primary" type="submit">
                 Add Message
               </button>
