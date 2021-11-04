@@ -47,7 +47,7 @@ const resolvers = {
       if (context.user) {
         const houseId = context.user.house._id
         console.log(houseId)
-        return await Chore.find({house: houseId})
+        return await Chore.find({house: houseId,isArchived:{$ne:true}})
           .populate('createdBy')
           .populate('assignedTo')
           .populate('house')
@@ -233,10 +233,18 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
-    editChore: async (parent, { _id, complete }, context) =>{
+    editChore: async (parent, { _id, complete, isArchived }, context) =>{
       console.log('editing a chore!')
       if (context.user) {
-        
+
+        if(isArchived){
+          let choreData = await Chore.findOneAndUpdate({'_id':_id},{
+            isArchived:true
+          }, {new:true} )
+          console.log(choreData)
+          return choreData  
+        }
+
         if(!complete){
         var completedAt = new Date()
         }

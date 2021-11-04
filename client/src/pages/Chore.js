@@ -42,6 +42,8 @@ export default function Chore() {
                         completedAt={chore.completedAt}
                         photo={chore.photo}
                         _id={chore._id}
+                        isArchived = {chore.isArchived}
+                        refetch = {refetch}
                     />
                 ))}
                 </div>
@@ -60,7 +62,9 @@ export default function Chore() {
                         photo={chore.photo}
                         _id={chore._id}
                         isOverdue={true}
-                    />
+                        isArchived = {chore.isArchived}
+                        refetch = {refetch}
+                        />
                 ))}
                 </div>
 
@@ -78,7 +82,9 @@ export default function Chore() {
                         completedAt={chore.completedAt}
                         photo={chore.photo}
                         _id={chore._id}
-                    />
+                        isArchived = {chore.isArchived}
+                        refetch = {refetch}
+                        />
                 ))}
                 </div>
             </div>)}

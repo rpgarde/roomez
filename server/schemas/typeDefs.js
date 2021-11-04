@@ -51,6 +51,7 @@ const typeDefs = gql`
     complete: Boolean!
     completedAt: String
     photo: String
+    isArchived:Boolean
   }
   type Message{
     _id: ID!
@@ -116,6 +117,7 @@ const typeDefs = gql`
       assignedTo: String
       complete: Boolean
       photo: String 
+      isArchived:Boolean
     ): Chore
     editBill(
       _id:ID!

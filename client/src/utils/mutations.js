@@ -109,8 +109,9 @@ export const EDIT_CHORE = gql`
       $photo: String 
       $assignedTo: String
       $complete: Boolean
+      $isArchived: Boolean
 ) {
-    editChore(_id: $_id, name: $name, dueAt: $dueAt, photo: $photo, assignedTo: $assignedTo, complete:$complete) {
+    editChore(_id: $_id, name: $name, dueAt: $dueAt, photo: $photo, assignedTo: $assignedTo, complete:$complete, isArchived:$isArchived) {
       _id
       createdAt
       name
@@ -118,6 +119,7 @@ export const EDIT_CHORE = gql`
       dueAt
       complete
       photo
+      isArchived
     }
   }
 `;

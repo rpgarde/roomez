@@ -5,8 +5,10 @@ import { EDIT_CHORE } from '../utils/mutations';
 
 function ChoreCard(props) {
     let imgString = '/images/'+props.photo
+    const refetch = props.refetch
 
     const [completeStatus,setCompleteStatus] = useState(props.complete)
+    const [isArchived,setIsArchived] = useState(false)
 
     const [editChore,{ error, data }] = useMutation(EDIT_CHORE)
 
@@ -29,6 +31,22 @@ function ChoreCard(props) {
              console.error(err)
          }
     }
+    const handleArchive = async(event)=>{
+        event.preventDefault()
+        try{
+            const {data} = await editChore({
+                variables:{
+                    _id:props._id,
+                    isArchived:true
+                }
+            })
+            setIsArchived(true)
+            refetch()
+        }
+        catch(err){
+            console.error(err)
+        }
+    }
 
     return (
         <div className="card m-3">
@@ -38,11 +56,14 @@ function ChoreCard(props) {
                 {props.completedAt&&<span className="badge bg-success mx-2 mb-3">Completed: <Moment format = "ddd, D MMM" parse = "x">{props.completedAt}</Moment></span>}
                 <p className="card-text">Assigned to: {props.assignedTo}</p>
                 <div>{props.photo ? (<img className = 'img-thumbnail mb-3' src = {imgString}/>) : null}</div>
+                <div className = "d-flex justify-content-between">                
                 {completeStatus?(
                 <button type = "button" className = "btn btn-secondary" onClick = {handleClick}>Mark Incomplete</button>
                 ):(
                 <button type = "button" className = "btn btn-primary" onClick = {handleClick}>Mark Complete</button>
                 )}
+                <button type="button" class="btn btn-outline-danger" onClick = {handleArchive}>Archive</button>
+            </div>
             </div>
         </div>
     )
