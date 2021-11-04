@@ -7,7 +7,7 @@ const {
 } = require('graphql-upload');
 const { typeDefs, resolvers } = require('./schemas')
 const PORT = process.env.PORT || 3001;
-mongoose.connect('mongodb://localhost:27017/roomez', {})
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/roomez', {})
 
 const { authMiddleware } = require('./utils/auth');
 
