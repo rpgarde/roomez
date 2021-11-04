@@ -22,11 +22,12 @@ const server = new ApolloServer({
 
 const path = require('path')
 const morgan = require('morgan')
-// const { Bill, Chore, House, Message, User } = require("./models");
 
 app.use(morgan('tiny'))
 
 app.use(express.urlencoded({ extended: true }))
+
+app.use(graphqlUploadExpress());
 
 // Step 1:
 if (process.env.NODE_ENV === "production") {
@@ -37,7 +38,6 @@ if (process.env.NODE_ENV === "production") {
 //   response.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
 // });
 
-app.use(graphqlUploadExpress());
 
 db.on('error', console.error.bind(console, 'connection error:'));
 
