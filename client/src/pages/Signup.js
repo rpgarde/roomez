@@ -67,7 +67,7 @@ const Signup = () => {
     <div className="row">
       <div className="col-6 offset-3">
         <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">Sign Up</h4>
+        <h4 className="custom-bg-darkblue text-white p-2 text-center">Sign Up</h4>
           <div className="card-body">
             {data ? (
               <p>
