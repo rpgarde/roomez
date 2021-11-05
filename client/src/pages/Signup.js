@@ -138,7 +138,7 @@ const Signup = () => {
                 </div>
                 <div className = "mb-3">
                   <UploadForm 
-                   handleUserPhoto={handlePhoto}
+                   handlePhoto={handlePhoto}
                   />
                 </div>
                 <HouseForm

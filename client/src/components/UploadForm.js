@@ -8,7 +8,6 @@ const UPLOAD_FILE = gql`
         }
     }
 `
-
 export default function UploadForm(props) {
     const [fileState,SetFileState] = useState('')
 
@@ -21,12 +20,13 @@ export default function UploadForm(props) {
         try {
             const file = await e.target.files[0]
             if (!file) return
-            await uploadFile({ variables: { file } })
-            SetFileState(file.name)
+            let uploadedFile = await uploadFile({ variables: { file } })
+            console.log(uploadedFile)
+            SetFileState(uploadedFile.data.uploadFile.url)
             props.handlePhoto({
-                photo:file.name
+                photo:uploadedFile.data.uploadFile.url
             })
-            console.log(file.name)
+            console.log(uploadedFile.data.uploadFile.url)
         }
         catch(err){
             console.error(err)

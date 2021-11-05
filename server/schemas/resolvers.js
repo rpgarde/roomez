@@ -147,19 +147,21 @@ const resolvers = {
       return { token, user };
     },
     uploadFile: async (parent, { file }) => {
+      console.log('uploading file')
       const { createReadStream, filename, mimetype, encoding } = await file;
 
-      const {ext,name} = path.parse(filename)
-      const randomName = generateRandomString(10) + ext
-
+      const {ext} = path.parse(filename)
+      const randomFileName = generateRandomString(10)+ext
       const stream = createReadStream();
-      const pathName = path.join(__dirname, '..', '..', `client/build/images/${randomName}`)
-
+      const pathName = path.join(__dirname, '..', '..', `client/build/images/${randomFileName}`)
+      console.log('File name :'+randomFileName)
+      // This is purely for demonstration purposes and will overwrite the
+      // local-file-output.txt in the current working directory on EACH upload.
       const out = require('fs').createWriteStream(pathName);
       await stream.pipe(out);
       // await finished(out);
 
-      return { url: pathName };
+      return { url:randomFileName };
     },
 
     addMessage: async (parent,args,context) =>{
