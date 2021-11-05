@@ -16,16 +16,6 @@ export default function UploadForm(props) {
         onCompleted: data => console.log(data)
     })
 
-    // function handleFileChange({
-    //     target: {
-    //       validity,
-    //       files: [file],
-    //     },
-    //   }) {
-    //     if (validity.valid) uploadFile({ variables: { file } });
-    //   }
-    
-
     const handleFileChange = async (e) => {
         e.preventDefault()
         try {
@@ -33,7 +23,7 @@ export default function UploadForm(props) {
             if (!file) return
             await uploadFile({ variables: { file } })
             SetFileState(file.name)
-            props.handleUserPhoto({
+            props.handlePhoto({
                 photo:file.name
             })
             console.log(file.name)

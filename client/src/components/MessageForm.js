@@ -40,8 +40,6 @@ const MessageForm = ({ handleMessagePost }) => {
 
   return (
     <div className = "m-3">
-      <h3>Leave a message</h3>
-
       {Auth.loggedIn() ? (
         <>
           <p
@@ -60,7 +58,7 @@ const MessageForm = ({ handleMessagePost }) => {
                 name="messageText"
                 placeholder="Add a new message here"
                 value={messageText}
-                className="form-control"
+                className="form-control mb-3"
                 rows = "3"
                 onChange={handleChange}
               ></textarea>

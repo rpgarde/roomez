@@ -40,7 +40,7 @@ const Signup = () => {
     })  
   }
 
-  const handleUserPhoto = (photo)=>{
+  const handlePhoto = (photo)=>{
     setFormState({
       ...formState,
       photo: photo.photo ? photo.photo : formState.photo
@@ -138,7 +138,7 @@ const Signup = () => {
                 </div>
                 <div className = "mb-3">
                   <UploadForm 
-                   handleUserPhoto={handleUserPhoto}
+                   handleUserPhoto={handlePhoto}
                   />
                 </div>
                 <HouseForm

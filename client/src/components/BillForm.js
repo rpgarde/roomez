@@ -5,6 +5,7 @@ import { QUERY_USER } from '../utils/queries'
 import { ADD_BILL } from '../utils/mutations'
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
+import UploadForm from './UploadForm'
 
 
 import Auth from '../utils/auth';
@@ -15,6 +16,16 @@ const BillForm = ({ handleBillPost }) => {
   const [date, setDate] = useState(new Date());
   const [amount,setAmount] = useState(0)
   const [characterCount, setCharacterCount] = useState(0);
+
+
+  const [fileName,setFileName] = useState();
+
+  const handlePhoto = (photo)=>{
+    const photoName = photo.photo
+    console.log(photoName)
+    setFileName(photoName)
+    console.log(fileName)
+  }
 
   const [addBill, { error, data }] = useMutation(ADD_BILL)
 
@@ -39,7 +50,8 @@ const BillForm = ({ handleBillPost }) => {
             name: billText,
             assignedTo: assignedTo,
             dueAt: date,
-            amount: Number(amount)
+            amount: Number(amount),
+            photo:fileName
           },
         });
       console.log(data)
@@ -127,6 +139,7 @@ const BillForm = ({ handleBillPost }) => {
                 onChange={handleChange}
               ></input>
             </div>
+            <UploadForm handlePhoto = {handlePhoto}/>
             <div className="text-center">
               <button className="btn btn-primary" type="submit">
                 Add Bill

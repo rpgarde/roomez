@@ -5,7 +5,7 @@ import { QUERY_USER } from '../utils/queries'
 import { ADD_CHORE } from '../utils/mutations'
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
-
+import UploadForm from './UploadForm'
 
 import Auth from '../utils/auth';
 
@@ -14,8 +14,16 @@ const ChoreForm = ({ handleChorePost }) => {
   const [assignedTo, setAssignedTo] = useState('');
   const [date, setDate] = useState(new Date());
 
+  const [fileName,setFileName] = useState();
+
   function onDateChange(date) {
     setDate(date);
+  }
+  const handlePhoto = (photo)=>{
+    const photoName = photo.photo
+    console.log(photoName)
+    setFileName(photoName)
+    console.log(fileName)
   }
 
 
@@ -37,7 +45,8 @@ const ChoreForm = ({ handleChorePost }) => {
           variables: {
             name: choreText,
             assignedTo: assignedTo,
-            dueAt: date
+            dueAt: date,
+            photo:fileName
           },
         });
       setChoreText('');
@@ -108,7 +117,7 @@ const ChoreForm = ({ handleChorePost }) => {
                 Character Count: {characterCount}/120
               </span>
             </div>
-
+            <UploadForm handlePhoto = {handlePhoto}/>
             <div className="text-center">
               <button className="btn btn-primary" type="submit">
                 Add Chore

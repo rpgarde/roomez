@@ -12,6 +12,7 @@ export const QUERY_HOUSE = gql`
         lastName
         mobile
         email
+        photo
       }
     }
  }
@@ -24,6 +25,7 @@ export const QUERY_USER = gql`
     firstName
     lastName
     email
+    photo
     house {
       _id
       address

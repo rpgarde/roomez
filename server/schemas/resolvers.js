@@ -141,7 +141,7 @@ const resolvers = {
       // Invoking the `createReadStream` will return a Readable Stream.
       // See https://nodejs.org/api/stream.html#stream_readable_streams
       const stream = createReadStream();
-      const pathName = path.join(__dirname, '..', '..', `client/public/images/${filename}`)
+      const pathName = path.join(__dirname, '..', '..', `client/build/public/images/${filename}`)
       console.log(pathName)
       // This is purely for demonstration purposes and will overwrite the
       // local-file-output.txt in the current working directory on EACH upload.
@@ -172,7 +172,7 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
-    addChore: async (parent, { name, assignedTo, dueAt },context) =>{
+    addChore: async (parent, { name, assignedTo, dueAt, photo },context) =>{
       console.log('adding a chore!')
       if (context.user) {
         let assignedToUser = await User.findOne({'_id':assignedTo})
@@ -180,7 +180,8 @@ const resolvers = {
         console.log(context.user)
         const newChore = {
           name:name,
-          dueAt: dueAt
+          dueAt: dueAt,
+          photo: photo
         }
         const chore = await Chore.create(newChore)
         console.log(chore)
@@ -202,7 +203,7 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
-    addBill: async (parent, { name, assignedTo, dueAt, amount },context) =>{
+    addBill: async (parent, { name, assignedTo, dueAt, amount, photo },context) =>{
       console.log('adding a bill!')
       if (context.user) {
         let assignedToUser = await User.findOne({'_id':assignedTo})
@@ -211,7 +212,8 @@ const resolvers = {
         const newBill = {
           name:name,
           dueAt: dueAt,
-          amount: amount
+          amount: amount,
+          photo: photo
         }
         const bill = await Bill.create(newBill)
         console.log(bill)

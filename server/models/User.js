@@ -31,7 +31,8 @@ const UserSchema = new Schema({
         ref:"House"
     },
     photo:{
-        type:String
+        type:String,
+        default:'profile.png'
     }
 });
 
