@@ -8,6 +8,17 @@ const {
 } = require('graphql-upload');
 // const { finished } = require('stream/promises');
 
+function generateRandomString(length) {
+  var result           = '';
+  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for ( var i = 0; i < length; i++ ) {
+    result += characters.charAt(Math.floor(Math.random() * 
+charactersLength));
+ }
+ return result;
+}
+
 const resolvers = {
   Upload: GraphQLUpload,
 
@@ -138,13 +149,12 @@ const resolvers = {
     uploadFile: async (parent, { file }) => {
       const { createReadStream, filename, mimetype, encoding } = await file;
 
-      // Invoking the `createReadStream` will return a Readable Stream.
-      // See https://nodejs.org/api/stream.html#stream_readable_streams
+      const {ext,name} = path.parse(filename)
+      const randomName = generateRandomString(10) + ext
+
       const stream = createReadStream();
-      const pathName = path.join(__dirname, '..', '..', `client/build/images/${filename}`)
-      console.log(pathName)
-      // This is purely for demonstration purposes and will overwrite the
-      // local-file-output.txt in the current working directory on EACH upload.
+      const pathName = path.join(__dirname, '..', '..', `client/build/images/${randomName}`)
+
       const out = require('fs').createWriteStream(pathName);
       await stream.pipe(out);
       // await finished(out);
