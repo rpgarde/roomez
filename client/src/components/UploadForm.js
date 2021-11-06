@@ -5,6 +5,9 @@ const S3_BUCKET = "roomez";
 const REGION = "ap-southeast-2";
 const ACCESS_KEY = process.env.REACT_APP_HEROKU_AWS_ACCESS_KEY
 const SECRET_ACCESS_KEY = process.env.REACT_APP_HEROKU_AWS_SECRET_ACCESS_KEY
+
+console.log(ACCESS_KEY)
+console.log(SECRET_ACCESS_KEY)
 // const ACCESS_KEY = process.env.REACT_APP_AWS_ACCESS_KEY_ID;
 // const SECRET_ACCESS_KEY = process.env.REACT_APP_AWS_SECRET_ACCESS_KEY;
 
