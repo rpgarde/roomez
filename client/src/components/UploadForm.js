@@ -1,6 +1,5 @@
 import React , {useState} from 'react';
 import S3FileUpload from 'react-s3';
-import {generateRandomString} from '../utils/helpers'
 
 const S3_BUCKET =process.env.REACT_APP_S3_BUCKET;
 const REGION =process.env.REACT_APP_AWS_REGION;

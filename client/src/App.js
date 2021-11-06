@@ -6,24 +6,21 @@ import {
     createHttpLink,
   } from '@apollo/client';
   import { setContext } from '@apollo/client/link/context';
-  import { BrowserRouter as Router, Route } from 'react-router-dom';
+  import { BrowserRouter as Router, Route , Redirect} from 'react-router-dom';
 import {createUploadLink} from 'apollo-upload-client'
 import Footer from './components/Footer'
 import Navigation from "./components/Navigation";
 import Landing from './pages/Landing';
 import Bill from './pages/Bill';
 import Chore from './pages/Chore';
-import Contact from './pages/Contact';
 import Message from './pages/Message';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Profile from './pages/Profile'
-import UploadForm from './components/UploadForm'
 import Home from './pages/Home'
-import UploadAWS from './components/UploadAWS'
 
 import './App.css'
-
+import Auth from './utils/auth'
 
 // Construct our main GraphQL API endpoint
 const httpLink = createUploadLink({
@@ -57,7 +54,7 @@ function App() {
           <Navigation />
           <main>
           <Route exact path="/">
-              <Home />
+              {Auth.loggedIn()?<Home />:<Redirect to="/welcome"/>}
             </Route>
             <Route exact path="/welcome">
               <Landing />
@@ -79,15 +76,6 @@ function App() {
             </Route>
             <Route exact path="/me">
               <Profile />
-            </Route>
-            <Route exact path="/contact">
-              <Contact />
-            </Route>
-            <Route exact path="/file">
-              <UploadAWS />
-            </Route>
-            <Route exact path="/hello">
-              <Landing />
             </Route>
           </main>
           <Footer />
