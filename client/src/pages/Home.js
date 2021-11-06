@@ -34,7 +34,7 @@ export default function Home() {
                 </div>
                 <div className="shadow custom-bg-darkblue text-white rounded col-5 col-md-3 mb-3">
                     <div className="card-body text-center">
-                        <h1 className = "fw-bold custom-text-yellow">{choreLoading?('...'):incompleteChores.length}</h1>
+                        <h1 className = "fw-bold">{choreLoading?('...'):incompleteChores.length}</h1>
                         <p>Incomplete Chores</p>
                         <Link to ='/chores'>
                         <button className = "shadow btn btn-warning btn-sm">Do your chores</button>
