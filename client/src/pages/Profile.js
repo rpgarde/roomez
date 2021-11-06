@@ -42,7 +42,7 @@ const Profile = () => {
       <h1 className="fw-bold text-center my-3">Welcome to your house</h1>
       <div className="row">
         <div className="col-md-6">
-          <div className="card mb-3">
+          <div className="card mb-3 border-0 shadow">
             <div className="card-body">
               <h5 className="card-title fw-bold">{house.address}</h5>
               {house.photo ? (<img src={house.photo} className="card-img-top" />) : null}
@@ -53,7 +53,7 @@ const Profile = () => {
         <div className="col-md-6">
           <h3 className="fw-bold mb-3">House Directory</h3>
           {occupants.map((user) => (
-            <div className="card mb-3">
+            <div className="card mb-3 border-0 shadow">
               <div className="card-body">
                 <div className="d-flex justify-content-between align-items-center">
                   <div>

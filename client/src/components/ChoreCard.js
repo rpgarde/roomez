@@ -49,7 +49,7 @@ function ChoreCard(props) {
     }
 
     return (
-        <div className="card m-3">
+        <div className="shadow card m-3">
             <div className="card-body">
                 <h5 className="card-title fw-bold">{props.name}</h5>
                 <span className={props.isOverdue?"badge bg-danger mb-3":"badge bg-warning text-dark mb-3"}>Due: <Moment format = "ddd, D MMM" parse = "x">{props.dueAt}</Moment></span> 

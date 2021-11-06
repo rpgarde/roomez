@@ -60,13 +60,13 @@ function App() {
               <Landing />
             </Route>
             <Route exact path="/messages">
-              <Message />
+            {Auth.loggedIn()?<Message />:<Redirect to="/welcome"/>}
             </Route>
             <Route exact path="/bills">
-              <Bill />
+            {Auth.loggedIn()?<Bill />:<Redirect to="/welcome"/>}
             </Route>
             <Route exact path="/chores">
-              <Chore />
+            {Auth.loggedIn()?<Chore />:<Redirect to="/welcome"/>}
             </Route>
             <Route exact path="/signup">
               <Signup />
@@ -75,7 +75,7 @@ function App() {
               <Login />
             </Route>
             <Route exact path="/me">
-              <Profile />
+            {Auth.loggedIn()?<Profile />:<Redirect to="/welcome"/>}
             </Route>
           </main>
           <Footer />

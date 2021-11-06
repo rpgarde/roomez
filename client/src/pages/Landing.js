@@ -20,8 +20,8 @@ export default function Landing() {
         className="bg-image p-5 text-center shadow-1-strong mb-5 text-white d-flex justify-content-center align-items-center"
         style={bgImageStyle}
       >
-        <div className="row">
-          <div className="col-sm-6 offset-3">
+        <div className="row justify-content-center">
+          <div className="col-sm-6 text-center">
             <img src={lightLogo} alt="roomEZ" className="img-fluid" />
             {/* <h1 className="mb-3 display-1">room<span className='ez'>EZ</span></h1> */}
             <h3 className="my-4">

@@ -66,13 +66,13 @@ const Signup = () => {
   return (
     <div className="row">
       <div className="col-6 offset-3">
-        <div className="card">
+        <div className="card border-0 shadow">
         <h4 className="custom-bg-darkblue text-white p-2 text-center">Sign Up</h4>
           <div className="card-body">
             {data ? (
               <p>
                 Success! You may now head{' '}
-                <Link to="/">back to the homepage.</Link>
+                <Link to="/">to the homepage.</Link>
               </p>
             ) : (
               <form className="form" onSubmit={handleFormSubmit}>

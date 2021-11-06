@@ -20,12 +20,12 @@ export default function Home() {
     
     return (
         <div className = "container-lg px-4">
-            <h4 className = "text-center mt-4 fw-bold">Welcome to roomEZ, {Auth.getProfile().data.firstName}.</h4>
+            <h4 className = "text-center mt-4 fw-bold custom-text-darkest">Welcome to roomEZ, {Auth.getProfile().data.firstName}.</h4>
             <h5 className = "text-center mb-4">Some things you might have missed at {Auth.getProfile().data.house.address}</h5>
             <div className="row d-flex justify-content-evenly">
                 <div className="shadow custom-bg-darkblue text-white rounded col-5 col-md-3 mb-3">
-                    <div className="card-body text-center">
-                    <h1 className = "fw-bold">{billLoading?('...'):(unpaidBills.length)}</h1>
+                    <div className="card-body text-center py-5">
+                    <h1 className = "fw-bold font-lg">{billLoading?('...'):(unpaidBills.length)}</h1>
                         <p>Unpaid Bills</p>
                         <Link to ='/bills'>
                         <button className = "shadow btn btn-warning btn-sm">Pay your bills</button>
@@ -33,8 +33,8 @@ export default function Home() {
                     </div>
                 </div>
                 <div className="shadow custom-bg-darkblue text-white rounded col-5 col-md-3 mb-3">
-                    <div className="card-body text-center">
-                        <h1 className = "fw-bold">{choreLoading?('...'):incompleteChores.length}</h1>
+                    <div className="card-body text-center py-5">
+                        <h1 className = "fw-bold font-lg">{choreLoading?('...'):incompleteChores.length}</h1>
                         <p>Incomplete Chores</p>
                         <Link to ='/chores'>
                         <button className = "shadow btn btn-warning btn-sm">Do your chores</button>
@@ -42,8 +42,8 @@ export default function Home() {
                     </div>
                 </div>
                 <div className="shadow custom-bg-darkblue text-white rounded col-5 col-md-3 mb-3">
-                    <div className="card-body text-center">
-                    <h1 className = "fw-bold">{messageLoading?('...'):messages.length}</h1>
+                    <div className="card-body text-center py-5">
+                    <h1 className = "fw-bold font-lg">{messageLoading?('...'):messages.length}</h1>
                         <p>Total Messages</p>
                         <Link to ='/messages'>
                         <button className = "shadow btn btn-warning btn-sm">Send a message</button>

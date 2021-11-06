@@ -26,9 +26,8 @@ const handleMessageCount = (event) => {
 console.log(messages)
     return (
         <div className = "container-fluid">
-                  <h1 className = "text-center mb-3 fw-bold">Messages</h1>
           <div className = "d-flex justify-content-center">
-            <div className = "col-lg-6 col-md-8">
+            <div className = "col-10 col-lg-6 col-md-8">
             <MessageForm handleMessagePost = {handleMessagePost}/>
             {postSuccess && <div className = "alert alert-success">Post successful!</div>}
             {/* <MessageCard 

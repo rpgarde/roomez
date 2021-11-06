@@ -39,9 +39,10 @@ const MessageForm = ({ handleMessagePost }) => {
   };
 
   return (
-    <div className = "m-3">
+    <div className = "card shadow border-0 m-3">
+              <h4 className="custom-bg-darkblue text-white p-2 text-center">Post a new message</h4>
       {Auth.loggedIn() ? (
-        <>
+        <div className = "card-body">
           <p
             className={`m-0 ${
               characterCount === 280 || error ? 'text-danger' : ''
@@ -59,14 +60,14 @@ const MessageForm = ({ handleMessagePost }) => {
                 placeholder="Add a new message here"
                 value={messageText}
                 className="form-control mb-3"
-                rows = "3"
+                rows = "2"
                 onChange={handleChange}
               ></textarea>
             </div>
 
             <div className="text-center">
               <button className="btn btn-primary" type="submit">
-                Add Message
+                Post
               </button>
             </div>
             {error && (
@@ -75,7 +76,7 @@ const MessageForm = ({ handleMessagePost }) => {
               </div>
             )}
           </form>
-        </>
+        </div>
       ) : (
         <p>
           You need to be logged in to leave messages. Please{' '}

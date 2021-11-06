@@ -51,6 +51,14 @@ background-color: #3E72A6
     color:#F7CB2D
 }
 
+.custom-text-darkest{
+    color:#23547B
+}
+
 .font-smallest{
     font-size:0.75em;
+}
+
+.font-lg{
+    font-size:4.5em;
 }

@@ -80,9 +80,9 @@ const BillForm = ({ handleBillPost }) => {
   };
 
   return (
-    <div className="m-3">
-      <h3 className = "mb-3 text-center">Add a new bill</h3>
-
+    <div className="col-12 col-lg-6 col-xxl-4">
+    <div className="shadow card m-3 border-0">
+    <h4 className="custom-bg-darkblue text-white p-2 text-center">Add a new bill</h4>
       {Auth.loggedIn() ? (
         <div className = "col-6 offset-3">
           <form
@@ -141,7 +141,7 @@ const BillForm = ({ handleBillPost }) => {
             </div>
             <UploadForm handlePhoto = {handlePhoto}/>
             <div className="text-center">
-              <button className="btn btn-primary" type="submit">
+            <button className="btn btn-primary my-3" type="submit">
                 Add Bill
               </button>
             </div>
@@ -159,6 +159,7 @@ const BillForm = ({ handleBillPost }) => {
           <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
         </p>
       )}
+    </div>
     </div>
   );
 };

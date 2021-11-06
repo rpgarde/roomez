@@ -43,6 +43,8 @@ function Navigation({ currentPage, handlePageChange }) {
                 Messages
               </a>
             </li>}
+            </ul>
+            <ul className="navbar-nav navbar-right mb-2 mb-lg-0">
             <li className="nav-item">
               {Auth.loggedIn() ? (
                   <a href="/me"
