@@ -15,15 +15,13 @@ function ChoreCard(props) {
     const handleClick = async (event) => {
         event.preventDefault()
         try{
-        console.log('id: '+props._id)
-        // setCompleteStatus(!completeStatus)
-        console.log('after:'+completeStatus)
         const {data} = await editChore({
             variables:{
                 _id:props._id,
                 complete:completeStatus
             }
         })
+        refetch()
         console.log(data)
          }
          catch(err){

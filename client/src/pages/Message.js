@@ -44,7 +44,7 @@ console.log(messages)
             house = {message.house.address}
             />
             ))}
-                    <div className="my-3">
+             {messages.length>10&&<div className="my-3">
                 <label className="form-label text-center" htmlFor="assignedTo">Showing the last {messageCount} messages</label>
                 <select
                   id="assignedTo"
@@ -52,12 +52,12 @@ console.log(messages)
                   name="assignedTo"
                   onChange={handleMessageCount}>
                   <option selected value="10">10</option>
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                    <option value="1000">1000</option>
+                    {messages.length>10&&<option value="25">25</option>}
+                    {messages.length>25&&<option value="50">50</option>}
+                    {messages.length>50&&<option value="100">100</option>}
+                    {messages.length>100&&<option value="1000">1000</option>}
                 </select>
-                </div>
+                </div>}
           </div>
           
         </div>

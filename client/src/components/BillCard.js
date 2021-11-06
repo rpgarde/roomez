@@ -14,7 +14,6 @@ function BillCard(props) {
     const handlePaid = async(event)=>{
         event.preventDefault()
         try{
-            // setPaidStatus(!paidStatus)
             // console.log(props._id)
             // console.log(paidStatus)
             const {data} = await editBill({
@@ -23,6 +22,8 @@ function BillCard(props) {
                     paid:paidStatus
                 }
             })
+            setPaidStatus(!paidStatus)
+            refetch()
         }
         catch(err){
             console.error(err)
@@ -56,7 +57,7 @@ function BillCard(props) {
                     <h5 className="card-title fw-bold">${props.amount} <span className = "font-half fw-lighter">(${Math.round(props.amount/props.occupants)} each)</span></h5>
                 </div>
                 <span className={props.isOverdue?"badge bg-danger mb-3":"badge bg-warning text-dark mb-3"}>Due: <Moment format = "ddd, D MMM" parse = "x">{props.dueAt}</Moment></span> 
-                {props.paidAt&&<span className="badge bg-success mx-2 mb-3">Paid: <Moment format = "ddd, D MMM" parse = "x">{props.paidAt}</Moment></span>}
+                {paidStatus&&<span className="badge bg-success mx-2 mb-3">Paid: <Moment format = "ddd, D MMM" parse = "x">{props.paidAt}</Moment></span>}
                 <p className="card-text">Assigned to: {props.assignedTo}</p>
                 <div>{props.photo ? (<img className = 'img-thumbnail mb-3' src = {props.photo}/>) : null}</div>
                 <div className = "d-flex justify-content-between">

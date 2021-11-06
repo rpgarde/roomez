@@ -43,9 +43,10 @@ export default function Bill() {
         {postSuccess && <div className="alert alert-success">Post successful!</div>}
       </div>
       {loading ? <h1>Now loading...</h1>
-        : (<div className="row">
+        : (
+        <div className="row">
           <div className="col-md-4 custom-bg-light-blue">
-            <h4 className="fw-bold text-center mt-3">To Pay ({unpaidBills.length})</h4>
+            {bills.length>0&&<h4 className="fw-bold text-center mt-3">To Pay ({unpaidBills.length})</h4>}
             {unpaidBills && unpaidBills.map((bill) => (
               <BillCard
                 name={bill.name}
@@ -67,7 +68,7 @@ export default function Bill() {
             ))}
           </div>
           <div className="col-md-4 custom-bg-light-blue">
-            <h4 className="fw-bold text-center mt-3">Overdue ({overdueBills.length})</h4>
+            {bills.length>0&&<h4 className="fw-bold text-center mt-3">Overdue ({overdueBills.length})</h4>}
             {overdueBills && overdueBills.map((bill) => (
               <BillCard
                 name={bill.name}
@@ -91,7 +92,7 @@ export default function Bill() {
           </div>
 
           <div className="col-md-4 custom-bg-light-blue">
-            <h4 className="fw-bold text-center mt-3">Paid ({paidBills.length})</h4>
+            {bills.length>0&&<h4 className="fw-bold text-center mt-3">Paid ({paidBills.length})</h4>}
             {paidBills && paidBills.map((bill) => (
               <BillCard
                 name={bill.name}
@@ -112,7 +113,8 @@ export default function Bill() {
               />
             ))}
           </div>
-        </div>)}
+        </div>
+        )}
 
     </div>
   );

@@ -146,29 +146,6 @@ const resolvers = {
       console.log(token)
       return { token, user };
     },
-    uploadFile: async (parent, { file }) => {
-      console.log('uploading file')
-      const { createReadStream, filename, mimetype, encoding } = await file;
-
-      const {ext} = path.parse(filename)
-      const randomFileName = generateRandomString(10)+ext
-      const stream = createReadStream();
-
-      var precedingPath = 'client/public/images'
-      if (process.env.NODE_ENV === "production") {
-        precedingPath = 'client/build/images/'
-      }
-
-      const pathName = path.join(__dirname, '..', '..',precedingPath,randomFileName)
-      console.log('File name :'+randomFileName)
-      // This is purely for demonstration purposes and will overwrite the
-      // local-file-output.txt in the current working directory on EACH upload.
-      const out = require('fs').createWriteStream(pathName);
-      await stream.pipe(out);
-      // await finished(out);
-
-      return { url:randomFileName };
-    },
 
     addMessage: async (parent,args,context) =>{
       console.log('received message!')

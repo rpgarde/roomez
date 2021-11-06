@@ -30,7 +30,7 @@ export default function Chore() {
             {loading ? <h1>Now loading...</h1>
                 : (<div className="row">
                     <div className="col-md-4 custom-bg-light-blue">
-                        <h4 className="fw-bold text-center mt-3">To-do ({incompleteChores.length})</h4>
+                        {chores.length>0&&<h4 className="fw-bold text-center mt-3">To-do ({incompleteChores.length})</h4>}
                         {incompleteChores && incompleteChores.map((chore) => (
                             <ChoreCard
                                 createdAt={chore.createdAt}
@@ -49,7 +49,7 @@ export default function Chore() {
                         ))}
                     </div>
                     <div className="col-md-4 custom-bg-light-blue">
-                        <h4 className="fw-bold text-center mt-3">Overdue ({overdueChores.length})</h4>
+                        {chores.length>0&&<h4 className="fw-bold text-center mt-3">Overdue ({overdueChores.length})</h4>}
                         {overdueChores && overdueChores.map((chore) => (
                             <ChoreCard
                                 createdAt={chore.createdAt}
@@ -70,7 +70,7 @@ export default function Chore() {
                     </div>
 
                     <div className="col-md-4 custom-bg-light-blue">
-                        <h4 className="fw-bold text-center mt-3">Done ({completedChores.length})</h4>
+                        {chores.length>0&&<h4 className="fw-bold text-center mt-3">Done ({completedChores.length})</h4>}
                         {completedChores && completedChores.map((chore) => (
                             <ChoreCard
                                 createdAt={chore.createdAt}

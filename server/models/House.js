@@ -7,7 +7,8 @@ const HouseSchema = new Schema({
         required: true,
     },
     photo: {
-        type: String
+        type: String,
+        default:"/images/house.jpg"
     },
     occupants: [{
         type:Schema.Types.ObjectId,

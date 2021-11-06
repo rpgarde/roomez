@@ -67,10 +67,6 @@ const typeDefs = gql`
     user: User
   }
 
-  type File {
-    url: String!
-  }
-  
   type Query {
     house(_id: String): [House]
     user(_id: String): [User]
@@ -92,7 +88,6 @@ const typeDefs = gql`
       code: String!     
       ): Auth
     login(email: String!, password: String!): Auth
-    uploadFile(file: Upload!): File!
     addMessage(
       message: String!
       photo: String
