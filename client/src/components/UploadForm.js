@@ -2,10 +2,10 @@ import React , {useState} from 'react';
 import S3FileUpload from 'react-s3';
 import {generateRandomString} from '../utils/helpers'
 
-const S3_BUCKET ='roomez';
-const REGION ='ap-southeast-2';
-const ACCESS_KEY ='AKIATIWBIG3H4K6JBXKP';
-const SECRET_ACCESS_KEY ='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';
+const S3_BUCKET =process.env.REACT_APP_S3_BUCKET;
+const REGION =process.env.REACT_APP_AWS_REGION;
+const ACCESS_KEY =process.env.REACT_APP_AWS_ACCESS_KEY_ID;
+const SECRET_ACCESS_KEY = process.env.REACT_APP_AWS_SECRET_ACCESS_KEY;
 
 const config = {
     bucketName: S3_BUCKET,
