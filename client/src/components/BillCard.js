@@ -45,14 +45,15 @@ function BillCard(props) {
             console.error(err)
         }
     }
-    
+
+
     return (
         !isArchived&&
          <div className="card m-3">
             <div className="card-body">
                 <div className = "d-flex justify-content-between">
                     <h5 className="card-title fw-bold">{props.name}</h5>
-                    <h5 className="card-title fw-bold">${props.amount}</h5>
+                    <h5 className="card-title fw-bold">${props.amount} <span className = "font-half fw-lighter">(${Math.round(props.amount/props.occupants)} each)</span></h5>
                 </div>
                 <span className={props.isOverdue?"badge bg-danger mb-3":"badge bg-warning text-dark mb-3"}>Due: <Moment format = "ddd, D MMM" parse = "x">{props.dueAt}</Moment></span> 
                 {props.paidAt&&<span className="badge bg-success mx-2 mb-3">Paid: <Moment format = "ddd, D MMM" parse = "x">{props.paidAt}</Moment></span>}

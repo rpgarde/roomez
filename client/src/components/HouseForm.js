@@ -2,11 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const HouseForm = (props) => {
-  // const [houseFormState, setHouseFormState] = useState({
-  //   houseAddress: '',
-  //   housePhoto: '',
-  //   houseCode: ''
-  // });
   
   const [address, setHouseAddress] = useState('');
   const [code, setHouseCode] = useState('');
@@ -33,29 +28,14 @@ const HouseForm = (props) => {
     })
   }
 
-
-  // const handleChange = (event) => {
-  //   const { name, value } = event.target;
-
-  //   setHouseFormState({
-  //     ...houseFormState,
-  //     [name]: value,
-  //   });
-
-  //   props.handleHouseForm({
-  //     ...houseFormState,
-  //     [name]: value,
-  //   })
-  // };
-
   return (
     <div>
       <div>
         Are you joining a sharehouse or creating your own?
       </div>
       <div className = "mb-3">
-      <button type="button" className = "btn btn-primary" onClick={() => setHouseState('join')}>Join a sharehouse</button>
-      <button type="button" className = "btn btn-primary" onClick={() => setHouseState('create')}>Create a sharehouse</button>
+      <button type="button" className = {houseState==='join'?"btn btn-primary mx-2":"btn btn-secondary me-2"} onClick={() => setHouseState('join')}>Join a sharehouse</button>
+      <button type="button" className = {houseState==='join'?"btn btn-secondary":"btn btn-primary"} onClick={() => setHouseState('create')}>Create a sharehouse</button>
       </div>
       {
         houseState === 'join' ?

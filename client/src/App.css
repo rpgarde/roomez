@@ -59,6 +59,10 @@ background-color: #3E72A6
     font-size:0.75em;
 }
 
+.font-half{
+    font-size:0.50em;
+}
+
 .font-lg{
     font-size:4.5em;
 }

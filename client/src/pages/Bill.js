@@ -3,7 +3,8 @@ import { useQuery } from '@apollo/client'
 
 import BillCard from '../components/BillCard'
 import BillForm from '../components/BillForm'
-import { QUERY_BILL } from '../utils/queries';
+import { QUERY_BILL, QUERY_HOUSE } from '../utils/queries';
+import Auth from '../utils/auth';
 
 export default function Bill() {
   const { loading, data, refetch } = useQuery(QUERY_BILL)
@@ -21,7 +22,20 @@ export default function Bill() {
     setTimeout(() => setPostSuccess(false), 3000)
   }
 
-  console.log(bills)
+  let currentHouseId
+  if (Auth.loggedIn()) {
+    currentHouseId = Auth.getProfile().data.house._id
+  }
+
+  const { loading:houseLoading, data:houseData } = useQuery(QUERY_HOUSE, {
+    variables: {
+      _id: currentHouseId ? currentHouseId : null
+    }
+  });
+
+  const house = houseData?.house[0] || {}
+  const occupants = house?.occupants || []
+
   return (
     <div className="container-fluid">
       <div className="d-flex justify-content-center mb-4">
@@ -48,6 +62,7 @@ export default function Bill() {
                 key={bill._id}
                 isArchived={bill.isArchived}
                 refetch={refetch}
+                occupants = {occupants.length}
               />
             ))}
           </div>
@@ -70,6 +85,7 @@ export default function Bill() {
                 isOverdue={true}
                 isArchived={bill.isArchived}
                 refetch={refetch}
+                occupants = {occupants.length}
               />
             ))}
           </div>
@@ -92,6 +108,7 @@ export default function Bill() {
                 key={bill._id}
                 isArchived={bill.isArchived}
                 refetch={refetch}
+                occupants = {occupants.length}
               />
             ))}
           </div>
