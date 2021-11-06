@@ -8,7 +8,7 @@ module.exports = [
         // assignedTo: 2,
         amount: 100,
         paid:false,
-        photo:'bill1.png'
+        photo:'/images/bill1.png'
     },
     {
         createdAt: new Date(new Date().setDate(new Date().getDate() - 1)),
@@ -20,7 +20,7 @@ module.exports = [
         amount: 80,
         paid:true,
         paidAt:new Date(new Date().setDate(new Date().getDate())),
-        photo:'bill2.png'
+        photo:'/images/bill2.png'
     },
     {
         createdAt: new Date(new Date().setDate(new Date().getDate() - 3)),

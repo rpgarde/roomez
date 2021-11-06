@@ -4,7 +4,7 @@ module.exports = [
         name: "Cooking",
         dueAt: new Date(new Date().setDate(new Date().getDate() + 7)),
         complete:false,
-        photo:'chore1.jpg'
+        photo:'/images/cooking.jpeg'
     },
     {
         createdAt: new Date(new Date().setDate(new Date().getDate() - 1)),

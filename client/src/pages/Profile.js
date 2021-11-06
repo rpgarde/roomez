@@ -36,9 +36,7 @@ const Profile = () => {
   if (loading) {
     return <div>Loading...</div>;
   }
-  let houseImgString = '/images/' + house.photo
-  let userImgString = '/images/'
-
+  
   return (
     <div className="container-fluid">
       <h1 className="fw-bold text-center my-3">Welcome to your house</h1>
@@ -47,7 +45,7 @@ const Profile = () => {
           <div className="card mb-3">
             <div className="card-body">
               <h5 className="card-title fw-bold">{house.address}</h5>
-              {house.photo ? (<img src={houseImgString} className="card-img-top" />) : null}
+              {house.photo ? (<img src={house.photo} className="card-img-top" />) : null}
               <p className="card-text">Your code to share with your housemates: <span className="fw-bold">{house.code}</span></p>
             </div>
           </div>
@@ -63,7 +61,7 @@ const Profile = () => {
                     <p><span className="fw-bold">📞</span> {user.mobile}</p>
                     <p><span className="fw-bold">✉️</span> {user.email}</p>
                   </div>
-                  {user.photo ? (<img src={userImgString + user.photo} className="w-25 rounded-pill" />) : null}
+                  {user.photo ? (<img src={user.photo} className="w-25 rounded-pill" />) : null}
                 </div>
               </div>
             </div>

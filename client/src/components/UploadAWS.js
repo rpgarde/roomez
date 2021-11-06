@@ -14,26 +14,29 @@ const config = {
     secretAccessKey: SECRET_ACCESS_KEY,
 }
 
-const UploadForm = (props) => {
+const UploadAWS = () => {
 
     const [selectedFile, setSelectedFile] = useState(null);
 
     const handleFileInput = (e) => {
-        e.preventDefault()
+        // const randomFileName = new File(e.target.files[0],'test.jpg')
+        // console.log(randomFileName)
+        console.log(e.target.files[0])
         setSelectedFile(e.target.files[0]);
-            S3FileUpload
-                .uploadFile(e.target.files[0], config)
-                .then(data => {
-                    props.handlePhoto({
-                    photo:data.location
-                })})
-                .catch(err => console.error(err))
+    }
+
+    const handleUpload = async (file) => {
+        S3FileUpload
+            .uploadFile(file, config,'qwkelqwe')
+            .then(data => console.log(data.location))
+            .catch(err => console.error(err))
     }
 
     return <div>
-            <label className="form-label" htmlFor="fileUpload">Upload a Photo</label>
-            <input name = "photo" type="file" className="form-control" id="fileUpload" onChange={handleFileInput}  />
+        <div>React S3 File Upload</div>
+        <input type="file" onChange={handleFileInput}/>
+        <button onClick={() => handleUpload(selectedFile)}> Upload to S3</button>
     </div>
 }
 
-export default UploadForm;
+export default UploadAWS;

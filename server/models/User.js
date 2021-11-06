@@ -32,7 +32,7 @@ const UserSchema = new Schema({
     },
     photo:{
         type:String,
-        default:'profile.png'
+        default:'/images/profile.png'
     }
 });
 

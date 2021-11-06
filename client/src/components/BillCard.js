@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client';
 import { EDIT_BILL } from '../utils/mutations';
 
 function BillCard(props) {
-    let imgString = '/images/'+props.photo
+
     const refetch = props.refetch
     const [paidStatus,setPaidStatus] = useState(props.paid)
     const [isArchived,setIsArchived] = useState(false)
@@ -57,7 +57,7 @@ function BillCard(props) {
                 <span className={props.isOverdue?"badge bg-danger mb-3":"badge bg-warning text-dark mb-3"}>Due: <Moment format = "ddd, D MMM" parse = "x">{props.dueAt}</Moment></span> 
                 {props.paidAt&&<span className="badge bg-success mx-2 mb-3">Paid: <Moment format = "ddd, D MMM" parse = "x">{props.paidAt}</Moment></span>}
                 <p className="card-text">Assigned to: {props.assignedTo}</p>
-                <div>{props.photo ? (<img className = 'img-thumbnail mb-3' src = {imgString}/>) : null}</div>
+                <div>{props.photo ? (<img className = 'img-thumbnail mb-3' src = {props.photo}/>) : null}</div>
                 <div className = "d-flex justify-content-between">
                 {paidStatus?(
                 <button type = "button" className = "btn btn-secondary" onClick = {handlePaid}>Mark Unpaid</button>

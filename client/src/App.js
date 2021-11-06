@@ -19,7 +19,8 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Profile from './pages/Profile'
 import UploadForm from './components/UploadForm'
-
+import Home from './pages/Home'
+import UploadAWS from './components/UploadAWS'
 
 import './App.css'
 
@@ -55,7 +56,10 @@ function App() {
         <div className="d-flex flex-column min-100-vh">
           <Navigation />
           <main>
-            <Route exact path="/">
+          <Route exact path="/">
+              <Home />
+            </Route>
+            <Route exact path="/welcome">
               <Landing />
             </Route>
             <Route exact path="/messages">
@@ -80,7 +84,7 @@ function App() {
               <Contact />
             </Route>
             <Route exact path="/file">
-              <UploadForm />
+              <UploadAWS />
             </Route>
             <Route exact path="/hello">
               <Landing />
