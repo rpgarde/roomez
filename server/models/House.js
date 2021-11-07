@@ -17,6 +17,7 @@ const HouseSchema = new Schema({
     code: {
         type:String,
         required:true,
+        minlength: 5,
         unique:true
     }
 });

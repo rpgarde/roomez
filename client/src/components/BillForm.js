@@ -80,7 +80,7 @@ const BillForm = ({ handleBillPost }) => {
   };
 
   return (
-    <div className="col-12 col-lg-6 col-xxl-4">
+    <div className="mx-auto col-12 col-lg-6 col-xxl-4">
     <div className="shadow card m-3 border-0">
     <h4 className="custom-bg-darkblue text-white p-2 text-center">Add a new bill</h4>
       {Auth.loggedIn() ? (

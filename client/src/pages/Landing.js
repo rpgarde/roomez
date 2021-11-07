@@ -30,7 +30,7 @@ export default function Landing() {
             <a href = "/signup" className="btn btn-secondary">
               Join Now
             </a>
-            <h4 className = "mt-4">Already living the EZ life? Login <a className = "link-light" href = "/login">here</a></h4>
+            <h5 className = "mt-4">Already living the EZ life? Login <a className = "link-light" href = "/login">here</a></h5>
           </div>
         </div>
         <div>

@@ -21,7 +21,7 @@ export default function Footer() {
                 </a>
             </div>
             <div className="container d-flex justify-content-center">
-                <span className="text-muted">roomEZ is developed by Paolo Garde. Follow him on socials above.</span>
+                <span className="text-muted">roomEZ is developed by Paolo Garde.</span>
             </div>
         </footer>
     )

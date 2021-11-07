@@ -1,10 +1,9 @@
-import React from 'react';
-import { Redirect, useParams } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
-
+import React, {useState} from 'react';
+import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_HOUSE } from '../utils/queries';
-
+import UploadForm from '../components/UploadForm'
 import Auth from '../utils/auth';
+import {EDIT_HOUSE_PHOTO} from '../utils/mutations'
 
 const Profile = () => {
   let currentHouseId
@@ -12,18 +11,41 @@ const Profile = () => {
     currentHouseId = Auth.getProfile().data.house._id
   }
 
-  const { loading, data } = useQuery(QUERY_HOUSE, {
+  const { loading, data:houseData, refetch } = useQuery(QUERY_HOUSE, {
     variables: {
       _id: currentHouseId ? currentHouseId : null
     }
   });
 
-  const house = data?.house[0] || {}
-  console.log(house)
-  const occupants = house.occupants
-  console.log(occupants)
+  const [fileName,setFileName] = useState();
 
-  // redirect to personal profile page if username is yours
+  const house = houseData?.house[0] || {}
+  const occupants = house.occupants
+
+  const [editHousePhoto,{error , data }] = useMutation(EDIT_HOUSE_PHOTO)
+
+  const handlePhoto = (photo)=>{
+    const photoName = photo.photo
+    setFileName(photoName)
+  }
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    console.log('uploading')
+    console.log(fileName)
+    try{
+      const { data } = await editHousePhoto({
+        variables:{
+          photo:fileName,
+          _id:house._id
+        }
+      })
+    }
+    catch(err){
+      console.error(err)
+    }
+  }
+
   if (!Auth.loggedIn()) {
     return (
       <h4>
@@ -47,6 +69,12 @@ const Profile = () => {
               <h5 className="card-title fw-bold">{house.address}</h5>
               {house.photo ? (<img src={house.photo} className="card-img-top" />) : null}
               <p className="card-text">Your code to share with your housemates: <span className="fw-bold">{house.code}</span></p>
+              <form onSubmit = {handleFormSubmit}>
+              <UploadForm handlePhoto = {handlePhoto}/>
+              <button className="btn btn-primary my-3" type="submit">
+                Upload
+              </button>
+              </form>
             </div>
           </div>
         </div>

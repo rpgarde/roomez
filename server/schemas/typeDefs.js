@@ -123,6 +123,10 @@ const typeDefs = gql`
       photo:String
       isArchived:Boolean
     ): Bill
+    editHousePhoto(
+      _id:ID!
+      photo:String
+    ): House
   }
 `
 

@@ -30,9 +30,7 @@ console.log(messages)
             <div className = "col-10 col-lg-6 col-md-8">
             <MessageForm handleMessagePost = {handleMessagePost}/>
             {postSuccess && <div className = "alert alert-success">Post successful!</div>}
-            {/* <MessageCard 
-            messages = {messages}
-            /> */}
+            {loading&&<h5>Now loading...</h5>}
             {messages && 
             messages.slice(0,messageCount).map((message)=>(
             <MessageCard

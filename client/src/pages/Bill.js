@@ -38,11 +38,11 @@ export default function Bill() {
 
   return (
     <div className="container-fluid">
-      <div className="d-flex justify-content-center mb-4">
+      <div className="mb-4">
         <BillForm handleBillPost={handleBillPost} />
-        {postSuccess && <div className="alert alert-success">Post successful!</div>}
+        {postSuccess && <div className="alert alert-success mx-auto">Post successful!</div>}
       </div>
-      {loading ? <h1>Now loading...</h1>
+      {loading ? <h5>Now loading...</h5>
         : (
         <div className="row">
           <div className="col-md-4 custom-bg-light-blue">

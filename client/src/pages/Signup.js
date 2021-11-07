@@ -64,9 +64,9 @@ const Signup = () => {
   };
 
   return (
-    <div className="row">
-      <div className="col-6 offset-3">
-        <div className="card border-0 shadow my-3">
+    <div className="d-flex justify-content-center mb-4">
+      <div className="col-sm-8 col-lg-6 col-xxl-4">
+        <div className="card border-0 shadow m-3">
         <h4 className="custom-bg-darkblue text-white p-2 text-center">Sign Up</h4>
           <div className="card-body">
             {data ? (

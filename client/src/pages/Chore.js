@@ -23,11 +23,11 @@ export default function Chore() {
 
     return (
         <div className="container-fluid">
-            <div className="d-flex justify-content-center mb-4">
+            <div className="mb-4">
                 <ChoreForm handleChorePost={handleChorePost} />
-                {postSuccess && <div className="alert alert-success">Post successful!</div>}
+                {postSuccess && <div className="alert alert-success mx-auto">Post successful!</div>}
             </div>
-            {loading ? <h1>Now loading...</h1>
+            {loading ? <h5>Now loading...</h5>
                 : (<div className="row">
                     <div className="col-md-4 custom-bg-light-blue">
                         {chores.length>0&&<h4 className="fw-bold text-center mt-3">To-do ({incompleteChores.length})</h4>}

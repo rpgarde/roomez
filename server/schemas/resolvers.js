@@ -2,25 +2,8 @@ const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 const { Bill, Chore, House, Message, User } = require("../models");
 const path = require('path')
-const {
-  GraphQLUpload,
-  graphqlUploadExpress, // A Koa implementation is also exported.
-} = require('graphql-upload');
-// const { finished } = require('stream/promises');
-
-function generateRandomString(length) {
-  var result           = '';
-  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  var charactersLength = characters.length;
-  for ( var i = 0; i < length; i++ ) {
-    result += characters.charAt(Math.floor(Math.random() * 
-charactersLength));
- }
- return result;
-}
 
 const resolvers = {
-  Upload: GraphQLUpload,
 
   Query: {
     house: async (_, args, context) => {
@@ -327,6 +310,14 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+    editHousePhoto: async (parent, { _id, photo }) => {
+      console.log('editing house photo')
+      let houseData = await House.findOneAndUpdate({'_id':_id},{
+        photo:photo
+      }, {new:true} )
+      return houseData
+    },
+
   },
   
 };

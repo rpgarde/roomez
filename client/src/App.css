@@ -7,7 +7,11 @@
     font-family: 'Nanum Gothic', sans-serif;
 }
 
-main {
+body{
+    background-color:#FBFCF5
+}
+
+main{
     background-color:#FBFCF5
 }
 
@@ -43,6 +47,10 @@ h1 {
 background-color: #3E72A6
 }
 
+.custom-bg-light{
+    background-color:#FBFCF5
+}
+
 .custom-bg-darkestblue{
     background-color:#23547B
 }
@@ -65,4 +73,8 @@ background-color: #3E72A6
 
 .font-lg{
     font-size:4.5em;
+}
+
+.custom-border-yellow{
+    border-color:#F7CB2D
 }

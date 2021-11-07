@@ -50,9 +50,9 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div className="d-flex flex-column min-100-vh">
+        <div className="d-flex flex-column min-vh-100">
           <Navigation />
-          <main>
+          <main className = "custom-bg-light h-100">
           <Route exact path="/">
               {Auth.loggedIn()?<Home />:<Redirect to="/welcome"/>}
             </Route>

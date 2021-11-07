@@ -22,7 +22,6 @@ const Login = (props) => {
   // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
     try {
       const { data } = await login({
         variables: { ...formState },
@@ -42,7 +41,7 @@ const Login = (props) => {
 
   return (
     <main className="d-flex justify-content-center mb-4">
-      <div className="col-8 col-lg-6 col-xxl-4">
+      <div className="col-sm-8 col-lg-6 col-xxl-4">
         <div className="card m-3 border-0 shadow">
           <h4 className="custom-bg-darkblue text-white p-2 text-center">Login</h4>
           <div className="card-body">

@@ -16,14 +16,6 @@ function MessageCard(props) {
             </div>
             </div>
         </div>
-        // <div>
-        //     {messages.map((message)=>(
-        //                     <div className="card-body">
-        //         <h5 className="card-title fw-bold">Posted by {message.createdBy.firstName} on {message.createdAt}</h5>
-        //         <p className="card-text">{message.message}</p>
-        //         </div>
-        //     ))}
-        // </div>
     )
 
 }

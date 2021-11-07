@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import Moment from 'react-moment';
 import { useMutation } from '@apollo/client';
 import { EDIT_BILL } from '../utils/mutations';
+import Auth from '../utils/auth';
 
 function BillCard(props) {
 
@@ -50,16 +51,16 @@ function BillCard(props) {
 
     return (
         !isArchived&&
-         <div className="card m-3">
+         <div className={Auth.getProfile().data.firstName==props.assignedTo?"shadow card m-3 border-warning border-2":"shadow card m-3"}>
             <div className="card-body">
                 <div className = "d-flex justify-content-between">
                     <h5 className="card-title fw-bold">{props.name}</h5>
-                    <h5 className="card-title fw-bold">${props.amount} <span className = "font-half fw-lighter">(${Math.round(props.amount/props.occupants)} each)</span></h5>
+                    <h5 className="card-title fw-bold">${props.amount} {props.occupants>1&&<span className = "font-half fw-lighter">(${Math.round(props.amount/props.occupants)} each)</span>}</h5>
                 </div>
                 <span className={props.isOverdue?"badge bg-danger mb-3":"badge bg-warning text-dark mb-3"}>Due: <Moment format = "ddd, D MMM" parse = "x">{props.dueAt}</Moment></span> 
                 {paidStatus&&<span className="badge bg-success mx-2 mb-3">Paid: <Moment format = "ddd, D MMM" parse = "x">{props.paidAt}</Moment></span>}
                 <p className="card-text">Assigned to: {props.assignedTo}</p>
-                <div>{props.photo ? (<img className = 'img-thumbnail mb-3' src = {props.photo}/>) : null}</div>
+                {props.photo && (<a href = {props.photo}><img className = 'img-thumbnail mb-3' src = {props.photo}/></a>)}
                 <div className = "d-flex justify-content-between">
                 {paidStatus?(
                 <button type = "button" className = "btn btn-secondary" onClick = {handlePaid}>Mark Unpaid</button>

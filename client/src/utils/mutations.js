@@ -154,3 +154,14 @@ export const EDIT_BILL = gql`
   }
 `;
 
+export const EDIT_HOUSE_PHOTO = gql`
+  mutation editHousePhoto(      
+      $_id: ID!
+      $photo: String
+  ) {
+    editHousePhoto(_id: $_id, photo: $photo) {
+      _id
+      photo
+    }
+  }
+`;
