@@ -100,14 +100,12 @@ const resolvers = {
         return { token, user };
       }
       else{
-        console.log(houseData)
-        let user = await User.create(args);
         const newHouse = await House.create(houseData);
+        let user = await User.create(args);
         await User.findOneAndUpdate({ email }, { $push: { house: newHouse } })
         await House.findOneAndUpdate({ address }, { $push: { occupants: user } })
         user = await User.findOne({ email }).populate("house");
         const token = signToken(user);
-        console.log(token)
         return { token, user };
       }
     },
@@ -162,16 +160,10 @@ const resolvers = {
           photo: photo
         }
         const chore = await Chore.create(newChore)
-        console.log(chore)
         const choreId = chore._id
-        // console.log('message ID: '+messageId)
         let userData = await User.findOne({'_id':context.user._id})
-        // console.log('context user id: '+context.user._id)
         console.log(userData)
         let houseData = await House.findOne({'_id':context.user.house._id})
-        // console.log(houseData)
-        // let choreData = await ChorefindById(choreId)
-        // console.log(choreData)
         return Chore.findOneAndUpdate({_id: choreId}, { 
           house: houseData, 
           createdBy: userData, 
@@ -194,16 +186,9 @@ const resolvers = {
           photo: photo
         }
         const bill = await Bill.create(newBill)
-        console.log(bill)
         const billId = bill._id
-        // console.log('message ID: '+messageId)
         let userData = await User.findOne({'_id':context.user._id})
-        // console.log('context user id: '+context.user._id)
-        // console.log(userData)
         let houseData = await House.findOne({'_id':context.user.house._id})
-        // console.log(houseData)
-        // let choreData = await ChorefindById(choreId)
-        // console.log(choreData)
         return Bill.findOneAndUpdate({_id: billId}, { 
           house: houseData, 
           createdBy: userData, 
@@ -228,36 +213,12 @@ const resolvers = {
         if(!complete){
         var completedAt = new Date()
         }
-        // let assignedToUser = await User.findOne({'_id':assignedTo})
-        // console.log(assignedToUser)
-        // console.log(context.user)
-        // const editChore = {
-        //   name:name,
-        //   assignedTo,
-        //   dueAt,
-        //   complete
-        // }
-        // const chore = await Chore.create(newChore)
-        // console.log(chore)
-        // const choreId = chore._id
-        // // console.log('message ID: '+messageId)
-        // let userData = await User.findOne({'_id':context.user._id})
-        // // console.log('context user id: '+context.user._id)
-        // // console.log(userData)
-        // let houseData = await House.findOne({'_id':context.user.house._id})
-        // // console.log(houseData)
         let choreData = await Chore.findOneAndUpdate({'_id':_id},{
           completedAt:completedAt?completedAt:null,
           complete:!complete
         }, {new:true} )
         console.log(choreData)
         return choreData
-        // // console.log(choreData)
-        // return Chore.findOneAndUpdate({_id: choreId}, { 
-        //   house: houseData, 
-        //   createdBy: userData, 
-        //   assignedTo: assignedToUser
-        // }, {new:true} )
       }
       throw new AuthenticationError('You need to be logged in!');
     },
@@ -277,36 +238,12 @@ const resolvers = {
         if(!paid){
         var paidAt = new Date()
         }
-        // let assignedToUser = await User.findOne({'_id':assignedTo})
-        // console.log(assignedToUser)
-        // console.log(context.user)
-        // const editChore = {
-        //   name:name,
-        //   assignedTo,
-        //   dueAt,
-        //   complete
-        // }
-        // const chore = await Chore.create(newChore)
-        // console.log(chore)
-        // const choreId = chore._id
-        // // console.log('message ID: '+messageId)
-        // let userData = await User.findOne({'_id':context.user._id})
-        // // console.log('context user id: '+context.user._id)
-        // // console.log(userData)
-        // let houseData = await House.findOne({'_id':context.user.house._id})
-        // // console.log(houseData)
         let billData = await Bill.findOneAndUpdate({'_id':_id},{
           paidAt:paidAt?paidAt:null,
           paid:!paid
         }, {new:true} )
         console.log(billData)
         return billData
-        // // console.log(choreData)
-        // return Chore.findOneAndUpdate({_id: choreId}, { 
-        //   house: houseData, 
-        //   createdBy: userData, 
-        //   assignedTo: assignedToUser
-        // }, {new:true} )
       }
       throw new AuthenticationError('You need to be logged in!');
     },
