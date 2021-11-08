@@ -28,10 +28,13 @@ This is a full stack MERN app featuring the following tech:
 # Features
 - User creation: Users can create their own sharehouse or join an existing one using their unique code
 - Bills: Occupants can create, assign, and pay bills, as well as see how much each needs to pay
-- Chores: Occupants can create, assign, and complete chores
-- Messages: Leave a message for the next housemate to see
+- Chores: Occupants can create, assign, and complete chores with attached photos
+- Messages: Leave a message for the next housemate to see, with photo functionality
+- Dashboard: Homepage contains the key metrics you need to care about
 
 For more information, see documentation on [this Google Drive folder](https://drive.google.com/drive/u/0/folders/13OBbt-Y_DcjtyzUp1RRRqvs-RiFyWnGS). 
+
+# User Story
 
 ```md
 As a resident living in a sharehouse with housemates
