@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-
+import UploadForm from './UploadForm'
 import { ADD_MESSAGE } from '../utils/mutations'
 
 import Auth from '../utils/auth';
@@ -11,6 +11,15 @@ const MessageForm = ({ handleMessagePost }) => {
 
   const [characterCount, setCharacterCount] = useState(0);
 
+  const [fileName,setFileName] = useState();
+
+  const handlePhoto = (photo)=>{
+    const photoName = photo.photo
+    console.log(photoName)
+    setFileName(photoName)
+    console.log(fileName)
+  }
+
   const [addMessage, { error , data }] = useMutation(ADD_MESSAGE)
 
   const handleFormSubmit = async (event) => {
@@ -19,11 +28,13 @@ const MessageForm = ({ handleMessagePost }) => {
     try {
       const { data } = await addMessage({
         variables: {
-          message: messageText
+          message: messageText,
+          photo:fileName
         },
       });
       setMessageText('');
       handleMessagePost()
+      console.log(data)
     } catch (err) {
       console.error(err);
     }
@@ -64,9 +75,9 @@ const MessageForm = ({ handleMessagePost }) => {
                 onChange={handleChange}
               ></textarea>
             </div>
-
+            <UploadForm handlePhoto = {handlePhoto}/>
             <div className="text-center">
-              <button className="btn btn-primary" type="submit">
+              <button className="btn btn-primary my-3" type="submit">
                 Post
               </button>
             </div>

@@ -13,6 +13,7 @@ function MessageCard(props) {
                 <h5 className="card-title fw-bold">{props.name}</h5>
                 <h6 class="card-subtitle mb-2 text-white-50 font-smallest"><Moment format = "LLL" parse = "x">{props.createdAt}</Moment></h6>
                 <p className="card-text">{props.message}</p>
+                {props.photo && (<a href = {props.photo}><img className = 'img-thumbnail mb-3' src = {props.photo}/></a>)}
             </div>
             </div>
         </div>

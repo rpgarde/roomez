@@ -121,28 +121,19 @@ const resolvers = {
       if (!correctPw) {
         throw new AuthenticationError('Incorrect credentials');
       }
-      console.log(user)
       const token = signToken(user);
       console.log('here is the token')
-      console.log(token)
       return { token, user };
     },
 
     addMessage: async (parent,args,context) =>{
       console.log('received message!')
       if (context.user) {
-        console.log(context.user)
         const message = await Message.create(args)
-        console.log(message)
         const messageId = message._id
-        console.log('message ID: '+messageId)
         let userData = await User.findOne({'_id':context.user._id})
-        console.log('context user id: '+context.user._id)
-        console.log(userData)
         let houseData = await House.findOne({'_id':context.user.house._id})
-        console.log(houseData)
         let messageData = await Message.findById(messageId)
-        console.log(messageData)
         return Message.findOneAndUpdate({_id: messageId}, { house: houseData, createdBy: userData }, {new:true} )
       }
       throw new AuthenticationError('You need to be logged in!');

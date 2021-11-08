@@ -19,7 +19,7 @@ export default function Home() {
     const messages = messageData?.message || []
     
     return (
-        <div className = "container-lg px-4 custom-bg-light vh-100">
+        <div className = "container-lg px-4 custom-bg-light">
             <h4 className = "text-center mt-4 fw-bold custom-text-darkest">Welcome to roomEZ, {Auth.getProfile().data.firstName}.</h4>
             <h5 className = "text-center mb-4">Some things you might have missed at {Auth.getProfile().data.house.address}</h5>
             <div className="row d-flex justify-content-evenly"> 
