@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
-import UploadForm from './UploadForm'
-import { ADD_MESSAGE } from '../utils/mutations'
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useMutation } from "@apollo/client";
+import UploadForm from "./UploadForm"
+import { ADD_MESSAGE } from "../utils/mutations"
 
-import Auth from '../utils/auth';
+import Auth from "../utils/auth";
 
 const MessageForm = ({ handleMessagePost }) => {
-  const [messageText, setMessageText] = useState('');
+  const [messageText, setMessageText] = useState("");
 
   const [characterCount, setCharacterCount] = useState(0);
 
@@ -32,7 +32,7 @@ const MessageForm = ({ handleMessagePost }) => {
           photo:fileName
         },
       });
-      setMessageText('');
+      setMessageText("");
       handleMessagePost()
       console.log(data)
     } catch (err) {
@@ -43,7 +43,7 @@ const MessageForm = ({ handleMessagePost }) => {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    if (name === 'messageText' && value.length <= 280) {
+    if (name === "messageText" && value.length <= 280) {
       setMessageText(value);
       setCharacterCount(value.length);
     }
@@ -51,12 +51,12 @@ const MessageForm = ({ handleMessagePost }) => {
 
   return (
     <div className = "card shadow border-0 m-3">
-              <h4 className="custom-bg-darkblue text-white p-2 text-center">Post a new message</h4>
+      <h4 className="custom-bg-darkblue text-white p-2 text-center">Post a new message</h4>
       {Auth.loggedIn() ? (
         <div className = "card-body">
           <p
             className={`m-0 ${
-              characterCount === 280 || error ? 'text-danger' : ''
+              characterCount === 280 || error ? "text-danger" : ""
             }`}
           >
             Character Count: {characterCount}/280
@@ -90,7 +90,7 @@ const MessageForm = ({ handleMessagePost }) => {
         </div>
       ) : (
         <p>
-          You need to be logged in to leave messages. Please{' '}
+          You need to be logged in to leave messages. Please{" "}
           <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
         </p>
       )}

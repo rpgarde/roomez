@@ -1,15 +1,15 @@
-import React from 'react';
-import hero from '../images/hero.jpg'
-import lightLogo from '../images/light-logo.png'
-import message from '../images/message.jpg'
-import task from '../images/task.jpg'
-import bill from '../images/bill.jpg'
+import React from "react";
+import hero from "../images/hero.jpg"
+import lightLogo from "../images/light-logo.png"
+import message from "../images/message.jpg"
+import task from "../images/task.jpg"
+import bill from "../images/bill.jpg"
 
 const bgImageStyle = {
   backgroundImage: `url(${hero})`,
-  backgroundSize: 'cover',
-  height: '65vh',
-  backgroundPosition: 'center center'
+  backgroundSize: "cover",
+  height: "65vh",
+  backgroundPosition: "center center"
 }
 
 
@@ -37,20 +37,20 @@ export default function Landing() {
         </div>
       </div>
       <div className="container pitch">
-      <h1 className="text-center fw-bold">Tired of your chaotic sharehouse? Time to live the EZ life.</h1>
+        <h1 className="text-center fw-bold">Tired of your chaotic sharehouse? Time to live the EZ life.</h1>
         <div className="row my-3">
           <div className="col-sm-4">
-          <img src={task} alt="chore" className="img-fluid" />
+            <img src={task} alt="chore" className="img-fluid" />
             <h3 className="text-center fw-bold my-3">Divvy up chores</h3>
             <p>Never miss another chore thanks to our chore allocation and management system.</p>
           </div>
           <div className="col-sm-4">
-          <img src={bill} alt="bill" className="img-fluid" />
+            <img src={bill} alt="bill" className="img-fluid" />
             <h3 className="text-center fw-bold my-3">Split your bills</h3>
             <p>Pay your bills on time and make sure you all pay fairly with our bill split technology.</p>
           </div>
           <div className="col-sm-4">
-          <img src={message} alt="message" className="img-fluid" />
+            <img src={message} alt="message" className="img-fluid" />
             <h3 className="text-center fw-bold my-3">Keep in touch</h3>
             <p>Share a laugh, ask a question, or argue (nicely) using our messageboard.</p>
           </div>

@@ -1,6 +1,6 @@
-import React from 'react';
-import lightLogo from '../images/light-logo.png'
-import Auth from '../utils/auth'
+import React from "react";
+import lightLogo from "../images/light-logo.png"
+import Auth from "../utils/auth"
 
 function Navigation({ currentPage, handlePageChange }) {
 
@@ -24,49 +24,49 @@ function Navigation({ currentPage, handlePageChange }) {
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             {Auth.loggedIn()&&<li className="nav-item">
               <a aria-current="page" href="/bills"
-                className={window.location.pathname === '/bills' ? 'nav-link active' : 'nav-link'}
+                className={window.location.pathname === "/bills" ? "nav-link active" : "nav-link"}
               >
                 Bills
               </a>
             </li>}
             {Auth.loggedIn()&&<li className="nav-item">
               <a aria-current="page" href="/chores"
-                className={window.location.pathname === '/chores' ? 'nav-link active' : 'nav-link'}
-                >
+                className={window.location.pathname === "/chores" ? "nav-link active" : "nav-link"}
+              >
                 Chores
               </a>
             </li>}
             {Auth.loggedIn()&&<li className="nav-item">
               <a aria-current="page" href="/messages"
-                className={window.location.pathname === '/messages' ? 'nav-link active' : 'nav-link'}
-                >
+                className={window.location.pathname === "/messages" ? "nav-link active" : "nav-link"}
+              >
                 Messages
               </a>
             </li>}
-            </ul>
-            <ul className="navbar-nav navbar-right mb-2 mb-lg-0">
+          </ul>
+          <ul className="navbar-nav navbar-right mb-2 mb-lg-0">
             <li className="nav-item">
               {Auth.loggedIn() ? (
-                  <a href="/me"
-                  className={window.location.pathname === '/me' ? 'nav-link active' : 'nav-link'}
-                  >
-                    {Auth.getProfile().data.firstName}'s House
-                  </a>
+                <a href="/me"
+                  className={window.location.pathname === "/me" ? "nav-link active" : "nav-link"}
+                >
+                  {Auth.getProfile().data.firstName}`&apos;`s House
+                </a>
               ) : (
-                  <a className="nav-link" href="/login">
+                <a className="nav-link" href="/login">
                     Login
-                  </a>
+                </a>
               )}
             </li>
             <li className="nav-item">
               {Auth.loggedIn() ? (
-                  <a className="nav-link" href = "/" onClick={logout}>
+                <a className="nav-link" href = "/" onClick={logout}>
                     Logout
-                  </a>
+                </a>
               ) : (
-                  <a className="nav-link" href="/signup">
+                <a className="nav-link" href="/signup">
                     Signup
-                  </a>
+                </a>
               )}
             </li>
           </ul>

@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useMutation, useQuery } from '@apollo/client';
-import { QUERY_USER } from '../utils/queries'
-import { ADD_CHORE } from '../utils/mutations'
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useMutation, useQuery } from "@apollo/client";
+import { QUERY_USER } from "../utils/queries"
+import { ADD_CHORE } from "../utils/mutations"
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
-import UploadForm from './UploadForm'
+import UploadForm from "./UploadForm"
 
-import Auth from '../utils/auth';
+import Auth from "../utils/auth";
 
 const ChoreForm = ({ handleChorePost }) => {
-  const [choreText, setChoreText] = useState('');
-  const [assignedTo, setAssignedTo] = useState('');
+  const [choreText, setChoreText] = useState("");
+  const [assignedTo, setAssignedTo] = useState("");
   const [date, setDate] = useState(new Date());
 
   const [fileName, setFileName] = useState();
@@ -36,7 +36,7 @@ const ChoreForm = ({ handleChorePost }) => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log('Submitted form')
+    console.log("Submitted form")
     try {
       console.log(choreText)
       console.log(assignedTo)
@@ -49,8 +49,8 @@ const ChoreForm = ({ handleChorePost }) => {
           photo: fileName
         },
       });
-      setChoreText('');
-      setAssignedTo('')
+      setChoreText("");
+      setAssignedTo("")
       handleChorePost()
     } catch (err) {
       console.error(err);
@@ -63,7 +63,7 @@ const ChoreForm = ({ handleChorePost }) => {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    if (name === 'choreText' && value.length <= 280) {
+    if (name === "choreText" && value.length <= 280) {
       setChoreText(value);
       setCharacterCount(value.length);
     }
@@ -88,7 +88,7 @@ const ChoreForm = ({ handleChorePost }) => {
                   onChange={handleAssignedTo}>
                   <option selected value=''>Select</option>
                   {users.map((user) => (
-                    <option value={user._id}>{user.firstName}</option>
+                    <option key={user._id} value={user._id}>{user.firstName}</option>
                   ))
                   }
                 </select>
@@ -107,12 +107,12 @@ const ChoreForm = ({ handleChorePost }) => {
                   placeholder="What chore is this?"
                   value={choreText}
                   className="form-control w-100"
-                  style={{ lineHeight: '1.5', resize: 'vertical' }}
+                  style={{ lineHeight: "1.5", resize: "vertical" }}
                   onChange={handleChange}
                 ></input>
                 <span
-                  className={`form-text ${characterCount === 120 || error ? 'text-danger' : ''
-                    }`}
+                  className={`form-text ${characterCount === 120 || error ? "text-danger" : ""
+                  }`}
                 >
                   Character Count: {characterCount}/120
                 </span>
@@ -133,7 +133,7 @@ const ChoreForm = ({ handleChorePost }) => {
           </div>
         ) : (
           <p>
-            You need to be logged in to leave messages. Please{' '}
+            You need to be logged in to leave messages. Please{" "}
             <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
           </p>
         )}

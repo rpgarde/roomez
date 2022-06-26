@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import UploadForm from '../components/UploadForm'
-import HouseForm from '../components/HouseForm'
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import UploadForm from "../components/UploadForm"
+import HouseForm from "../components/HouseForm"
 
-import { useMutation } from '@apollo/client';
-import { ADD_USER_AND_HOUSE } from '../utils/mutations';
+import { useMutation } from "@apollo/client";
+import { ADD_USER_AND_HOUSE } from "../utils/mutations";
 
-import Auth from '../utils/auth';
+import Auth from "../utils/auth";
 
 const Signup = () => {
   const [formState, setFormState] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    mobile: '',
-    photo: '',
-    address: '',
-    code: ''
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    mobile: "",
+    photo: "",
+    address: "",
+    code: ""
   });
 
 
@@ -49,7 +49,7 @@ const Signup = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log('LOG FORM STATE')
+    console.log("LOG FORM STATE")
     console.log(formState)
 
     try {
@@ -67,11 +67,11 @@ const Signup = () => {
     <div className="d-flex justify-content-center mb-4">
       <div className="col-sm-8 col-lg-6 col-xxl-4">
         <div className="card border-0 shadow m-3">
-        <h4 className="custom-bg-darkblue text-white p-2 text-center">Sign Up</h4>
+          <h4 className="custom-bg-darkblue text-white p-2 text-center">Sign Up</h4>
           <div className="card-body">
             {data ? (
               <p>
-                Success! You may now head{' '}
+                Success! You may now head{" "}
                 <Link to="/">to the homepage.</Link>
               </p>
             ) : (
@@ -89,56 +89,56 @@ const Signup = () => {
                   />
                 </div>
                 <div className = "mb-3">
-                <label className="form-label" htmlFor="lastName">Last Name</label>
-                <input
-                  className="form-control"
-                  placeholder="Your last name"
-                  name="lastName"
-                  id="lastName"
-                  type="text"
-                  value={formState.lastName}
-                  onChange={handleChange}
-                />
+                  <label className="form-label" htmlFor="lastName">Last Name</label>
+                  <input
+                    className="form-control"
+                    placeholder="Your last name"
+                    name="lastName"
+                    id="lastName"
+                    type="text"
+                    value={formState.lastName}
+                    onChange={handleChange}
+                  />
                 </div>
                 <div className = "mb-3">
-                <label className="form-label" htmlFor="email">Email</label>
-                <input
-                  className="form-control"
-                  placeholder="Your email"
-                  name="email"
-                  id="email"
-                  type="email"
-                  value={formState.email}
-                  onChange={handleChange}
-                />
+                  <label className="form-label" htmlFor="email">Email</label>
+                  <input
+                    className="form-control"
+                    placeholder="Your email"
+                    name="email"
+                    id="email"
+                    type="email"
+                    value={formState.email}
+                    onChange={handleChange}
+                  />
                 </div>
                 <div className = "mb-3">
-                <label className="form-label" htmlFor="password">Password</label>
-                <input
-                  className="form-control"
-                  placeholder="******"
-                  name="password"
-                  id="password"
-                  type="password"
-                  value={formState.password}
-                  onChange={handleChange}
-                />
+                  <label className="form-label" htmlFor="password">Password</label>
+                  <input
+                    className="form-control"
+                    placeholder="******"
+                    name="password"
+                    id="password"
+                    type="password"
+                    value={formState.password}
+                    onChange={handleChange}
+                  />
                 </div>
                 <div className = "mb-3">
-                <label className="form-label" htmlFor="mobile">Mobile</label>
-                <input
-                  className="form-control"
-                  placeholder="Your mobile number"
-                  name="mobile"
-                  id="mobile"
-                  type="text"
-                  value={formState.mobile}
-                  onChange={handleChange}
-                />
+                  <label className="form-label" htmlFor="mobile">Mobile</label>
+                  <input
+                    className="form-control"
+                    placeholder="Your mobile number"
+                    name="mobile"
+                    id="mobile"
+                    type="text"
+                    value={formState.mobile}
+                    onChange={handleChange}
+                  />
                 </div>
                 <div className = "mb-3">
                   <UploadForm 
-                   handlePhoto={handlePhoto}
+                    handlePhoto={handlePhoto}
                   />
                 </div>
                 <HouseForm
@@ -146,7 +146,7 @@ const Signup = () => {
                 />
                 <button
                   className="btn btn-primary"
-                  style={{ cursor: 'pointer' }}
+                  style={{ cursor: "pointer" }}
                   type="submit"
                 >
                   Submit

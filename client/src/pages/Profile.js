@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import { useQuery, useMutation } from '@apollo/client';
-import { QUERY_HOUSE } from '../utils/queries';
-import UploadForm from '../components/UploadForm'
-import Auth from '../utils/auth';
-import {EDIT_HOUSE_PHOTO} from '../utils/mutations'
+import React, {useState} from "react";
+import { useQuery, useMutation } from "@apollo/client";
+import { QUERY_HOUSE } from "../utils/queries";
+import UploadForm from "../components/UploadForm"
+import Auth from "../utils/auth";
+import {EDIT_HOUSE_PHOTO} from "../utils/mutations"
 
 const Profile = () => {
   let currentHouseId
@@ -31,7 +31,7 @@ const Profile = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log('uploading')
+    console.log("uploading")
     console.log(fileName)
     try{
       const { data } = await editHousePhoto({
@@ -70,10 +70,10 @@ const Profile = () => {
               {house.photo ? (<img src={house.photo} className="card-img-top" />) : null}
               <p className="card-text">Your code to share with your housemates: <span className="fw-bold">{house.code}</span></p>
               <form onSubmit = {handleFormSubmit}>
-              <UploadForm handlePhoto = {handlePhoto}/>
-              <button className="btn btn-primary my-3" type="submit">
+                <UploadForm handlePhoto = {handlePhoto}/>
+                <button className="btn btn-primary my-3" type="submit">
                 Upload
-              </button>
+                </button>
               </form>
             </div>
           </div>
@@ -81,7 +81,7 @@ const Profile = () => {
         <div className="col-md-6">
           <h3 className="fw-bold mb-3">House Directory</h3>
           {occupants.map((user) => (
-            <div className="card mb-3 border-0 shadow">
+            <div className="card mb-3 border-0 shadow" key ={user.firstName}>
               <div className="card-body">
                 <div className="d-flex justify-content-between align-items-center">
                   <div>

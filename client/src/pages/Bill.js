@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { useQuery } from '@apollo/client'
+import React, { useState } from "react";
+import { useQuery } from "@apollo/client"
 
-import BillCard from '../components/BillCard'
-import BillForm from '../components/BillForm'
-import { QUERY_BILL, QUERY_HOUSE } from '../utils/queries';
-import Auth from '../utils/auth';
+import BillCard from "../components/BillCard"
+import BillForm from "../components/BillForm"
+import { QUERY_BILL, QUERY_HOUSE } from "../utils/queries";
+import Auth from "../utils/auth";
 
 export default function Bill() {
   const { loading, data, refetch } = useQuery(QUERY_BILL)
@@ -44,76 +44,76 @@ export default function Bill() {
       </div>
       {loading ? <h5>Now loading...</h5>
         : (
-        <div className="row">
-          <div className="col-md-4 custom-bg-light-blue">
-            {bills.length>0&&<h4 className="fw-bold text-center mt-3">To Pay ({unpaidBills.length})</h4>}
-            {unpaidBills && unpaidBills.map((bill) => (
-              <BillCard
-                name={bill.name}
-                message={bill.message}
-                createdAt={bill.createdAt}
-                dueAt={bill.dueAt}
-                assignedTo={bill.assignedTo.firstName}
-                createdBy={bill.createdBy.firstName}
-                photo={bill.photo}
-                _id={bill._id}
-                amount={bill.amount}
-                paidAt={bill.paidAt}
-                paid={bill.paid}
-                key={bill._id}
-                isArchived={bill.isArchived}
-                refetch={refetch}
-                occupants = {occupants.length}
-              />
-            ))}
-          </div>
-          <div className="col-md-4 custom-bg-light-blue">
-            {bills.length>0&&<h4 className="fw-bold text-center mt-3">Overdue ({overdueBills.length})</h4>}
-            {overdueBills && overdueBills.map((bill) => (
-              <BillCard
-                name={bill.name}
-                message={bill.message}
-                createdAt={bill.createdAt}
-                dueAt={bill.dueAt}
-                assignedTo={bill.assignedTo.firstName}
-                createdBy={bill.createdBy.firstName}
-                photo={bill.photo}
-                _id={bill._id}
-                amount={bill.amount}
-                paidAt={bill.paidAt}
-                paid={bill.paid}
-                key={bill._id}
-                isOverdue={true}
-                isArchived={bill.isArchived}
-                refetch={refetch}
-                occupants = {occupants.length}
-              />
-            ))}
-          </div>
+          <div className="row">
+            <div className="col-md-4 custom-bg-light-blue">
+              {bills.length>0&&<h4 className="fw-bold text-center mt-3">To Pay ({unpaidBills.length})</h4>}
+              {unpaidBills && unpaidBills.map((bill) => (
+                <BillCard
+                  name={bill.name}
+                  message={bill.message}
+                  createdAt={bill.createdAt}
+                  dueAt={bill.dueAt}
+                  assignedTo={bill.assignedTo.firstName}
+                  createdBy={bill.createdBy.firstName}
+                  photo={bill.photo}
+                  _id={bill._id}
+                  amount={bill.amount}
+                  paidAt={bill.paidAt}
+                  paid={bill.paid}
+                  key={bill._id}
+                  isArchived={bill.isArchived}
+                  refetch={refetch}
+                  occupants = {occupants.length}
+                />
+              ))}
+            </div>
+            <div className="col-md-4 custom-bg-light-blue">
+              {bills.length>0&&<h4 className="fw-bold text-center mt-3">Overdue ({overdueBills.length})</h4>}
+              {overdueBills && overdueBills.map((bill) => (
+                <BillCard
+                  name={bill.name}
+                  message={bill.message}
+                  createdAt={bill.createdAt}
+                  dueAt={bill.dueAt}
+                  assignedTo={bill.assignedTo.firstName}
+                  createdBy={bill.createdBy.firstName}
+                  photo={bill.photo}
+                  _id={bill._id}
+                  amount={bill.amount}
+                  paidAt={bill.paidAt}
+                  paid={bill.paid}
+                  key={bill._id}
+                  isOverdue={true}
+                  isArchived={bill.isArchived}
+                  refetch={refetch}
+                  occupants = {occupants.length}
+                />
+              ))}
+            </div>
 
-          <div className="col-md-4 custom-bg-light-blue">
-            {bills.length>0&&<h4 className="fw-bold text-center mt-3">Paid ({paidBills.length})</h4>}
-            {paidBills && paidBills.map((bill) => (
-              <BillCard
-                name={bill.name}
-                message={bill.message}
-                createdAt={bill.createdAt}
-                dueAt={bill.dueAt}
-                assignedTo={bill.assignedTo.firstName}
-                createdBy={bill.createdBy.firstName}
-                photo={bill.photo}
-                _id={bill._id}
-                amount={bill.amount}
-                paidAt={bill.paidAt}
-                paid={bill.paid}
-                key={bill._id}
-                isArchived={bill.isArchived}
-                refetch={refetch}
-                occupants = {occupants.length}
-              />
-            ))}
+            <div className="col-md-4 custom-bg-light-blue">
+              {bills.length>0&&<h4 className="fw-bold text-center mt-3">Paid ({paidBills.length})</h4>}
+              {paidBills && paidBills.map((bill) => (
+                <BillCard
+                  name={bill.name}
+                  message={bill.message}
+                  createdAt={bill.createdAt}
+                  dueAt={bill.dueAt}
+                  assignedTo={bill.assignedTo.firstName}
+                  createdBy={bill.createdBy.firstName}
+                  photo={bill.photo}
+                  _id={bill._id}
+                  amount={bill.amount}
+                  paidAt={bill.paidAt}
+                  paid={bill.paid}
+                  key={bill._id}
+                  isArchived={bill.isArchived}
+                  refetch={refetch}
+                  occupants = {occupants.length}
+                />
+              ))}
+            </div>
           </div>
-        </div>
         )}
 
     </div>

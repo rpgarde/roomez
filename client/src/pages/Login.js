@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
-import { LOGIN_USER } from '../utils/mutations';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useMutation } from "@apollo/client";
+import { LOGIN_USER } from "../utils/mutations";
 
-import Auth from '../utils/auth';
+import Auth from "../utils/auth";
 
 const Login = (props) => {
-  const [formState, setFormState] = useState({ email: '', password: '' });
+  const [formState, setFormState] = useState({ email: "", password: "" });
   const [login, { error, data }] = useMutation(LOGIN_USER);
 
   // update state based on form input changes
@@ -34,8 +34,8 @@ const Login = (props) => {
 
     // clear form values
     setFormState({
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     });
   };
 
@@ -47,38 +47,38 @@ const Login = (props) => {
           <div className="card-body">
             {data ? (
               <p>
-                Success! You may now head{' '}
+                Success! You may now head{" "}
                 <Link to="/">back to the homepage.</Link>
               </p>
             ) : (
               <form className = "form" onSubmit={handleFormSubmit}>
                 <div className = "mb-3">
                   <label forHtml="email">Email</label>
-                <input
-                  className="form-control"
-                  placeholder="Your email"
-                  name="email"
-                  type="email"
-                  id="email"
-                  value={formState.email}
-                  onChange={handleChange}
-                />
+                  <input
+                    className="form-control"
+                    placeholder="Your email"
+                    name="email"
+                    type="email"
+                    id="email"
+                    value={formState.email}
+                    onChange={handleChange}
+                  />
                 </div>
                 <div className = "mb-3">
-                <label forHtml="password">Password</label>
-                <input
-                  className="form-control"
-                  placeholder="******"
-                  name="password"
-                  type="password"
-                  id="password"
-                  value={formState.password}
-                  onChange={handleChange}
-                />
+                  <label forHtml="password">Password</label>
+                  <input
+                    className="form-control"
+                    placeholder="******"
+                    name="password"
+                    type="password"
+                    id="password"
+                    value={formState.password}
+                    onChange={handleChange}
+                  />
                 </div>
                 <button
                   className="btn btn-primary"
-                  style={{ cursor: 'pointer' }}
+                  style={{ cursor: "pointer" }}
                   type="submit"
                 >
                   Submit

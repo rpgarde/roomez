@@ -1,18 +1,16 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const HouseForm = (props) => {
   
-  const [address, setHouseAddress] = useState('');
-  const [code, setHouseCode] = useState('');
+  const [address, setHouseAddress] = useState("");
+  const [code, setHouseCode] = useState("");
 
-  const [houseState, setHouseState] = useState('create')
+  const [houseState, setHouseState] = useState("create")
 
   const handleCodeChange = (event)=> {
     const {value} = event.target;
-
     setHouseCode(value)
-
     props.handleHouseForm({
       code: value,
     })
@@ -34,13 +32,23 @@ const HouseForm = (props) => {
         Are you joining a sharehouse or creating your own?
       </div>
       <div className = "mb-3">
-      <button type="button" className = {houseState==='join'?"btn btn-primary mx-2":"btn btn-secondary me-2"} onClick={() => setHouseState('join')}>Join a sharehouse</button>
-      <button type="button" className = {houseState==='join'?"btn btn-secondary":"btn btn-primary"} onClick={() => setHouseState('create')}>Create a sharehouse</button>
+        <div className="form-check">
+          <input className="form-check-input" type="radio" name="join" id="join" value="join" onChange={()=>setHouseState("join")} checked={houseState==="join"}/>
+          <label className="form-check-label" htmlFor="join">
+          Join a sharehouse
+          </label>
+        </div>
+        <div className="form-check">
+          <input className="form-check-input" type="radio" name="create" id="create" value="create" onChange={()=>setHouseState("create")} checked={houseState==="create"}/>
+          <label className="form-check-label" htmlFor="create">
+          Create a new sharehouse
+          </label>
+        </div>
       </div>
       {
-        houseState === 'join' ?
+        houseState === "join" ?
           (<div className = "mb-3">
-          <label className = "form-label" htmlFor="houseCode">Code you should have gotten from your housemate</label>
+            <label className = "form-label" htmlFor="houseCode">Code you should have gotten from your housemate</label>
             <input
               className="form-control"
               name="houseCode"
@@ -48,12 +56,12 @@ const HouseForm = (props) => {
               value={code}
               placeholder="code you should have gotten"
               onChange={handleCodeChange}
-              />
+            />
           </div>
           ) : (
             <div>
               <div className = "mb-3">
-              <label className = "form-label" htmlFor="houseCode">Your property's address</label>
+                <label className = "form-label" htmlFor="houseCode">Your property`&apos;`s address</label>
                 <input
                   className="form-control"
                   id="address"
