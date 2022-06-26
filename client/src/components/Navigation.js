@@ -50,7 +50,7 @@ function Navigation({ currentPage, handlePageChange }) {
                 <a href="/me"
                   className={window.location.pathname === "/me" ? "nav-link active" : "nav-link"}
                 >
-                  {Auth.getProfile().data.firstName}`&apos;`s House
+                  {Auth.getProfile().data.firstName}&apos;s House
                 </a>
               ) : (
                 <a className="nav-link" href="/login">

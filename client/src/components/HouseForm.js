@@ -61,7 +61,7 @@ const HouseForm = (props) => {
           ) : (
             <div>
               <div className = "mb-3">
-                <label className = "form-label" htmlFor="houseCode">Your property`&apos;`s address</label>
+                <label className = "form-label" htmlFor="houseCode">Your property&apos;s address</label>
                 <input
                   className="form-control"
                   id="address"
